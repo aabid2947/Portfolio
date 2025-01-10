@@ -1,6 +1,6 @@
 export function AboutSection() {
     return (
-      <div className="relative min-h-screen bg-black px-8 py-16">
+      <div className="relative min-h-screen  px-8 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div className="space-y-8">

@@ -3,7 +3,7 @@ import { Github, DiscIcon as Discord, Twitter } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-zinc-800 bg-black">
+    <footer className="border-t border-zinc-800 ">
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex flex-col items-center gap-2 md:items-start">

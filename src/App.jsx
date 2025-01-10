@@ -1,19 +1,18 @@
-
-import HomePage from './pages/HomePage.jsx'
-
+import React from "react";
+import HomePage from "./pages/HomePage";
+import Hyperspeed from './components/ui/Hyperspeed';
 
 function App() {
-
   return (
-    <>
-      <div className=' text-black'>
+    <div className="relative min-h-screen">
+    
       
-
-       <HomePage  />
+      <div className="relative z-10 min-h-screen">
+        <HomePage />
       </div>
-     
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
+

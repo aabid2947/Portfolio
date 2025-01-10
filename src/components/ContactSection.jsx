@@ -1,6 +1,6 @@
 export default function ContactSection() {
     return (
-      <div className="min-h-screen bg-black px-8 py-24">
+      <div className="min-h-screen px-8 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="space-y-12">
             {/* Header */}
