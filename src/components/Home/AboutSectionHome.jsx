@@ -1,9 +1,9 @@
-import Img from '../assets/Group 50.png';
+import Img from '../../assets/Group 50.png';
 
 
 export default function AboutSection() {
     return (
-      <div className="  min-h-[400px] relative overflow-hidden px-8 py-8 md:px-8">
+      <div className="  min-h-[400px] relative overflow-hidden px-8 py-8 md:px-8 ">
         {/* Top-left dots pattern */}
         {/* <div className="absolute left-0 top-0 w-24 h-24 opacity-20">
           <div className="grid grid-cols-4 gap-2">
@@ -26,7 +26,7 @@ export default function AboutSection() {
           <div className="space-y-6">
             <h2 className="text-purple-400 text-lg font-mono">#about-me</h2>
             
-            <div className="space-y-4 text-gray-300">
+            <div className="space-y-4 text-gray-300 ">
               <p className="text-xl">Hello, I&apos;m Elias!</p>
               
               <p className="text-sm leading-relaxed">

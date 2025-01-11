@@ -1,7 +1,7 @@
-import { ProjectCard } from "../components/projectCard";
+import { ProjectCard } from "../components/Project/projectCard";
 import NavBar from "../components/Navbar";
 import Footer from "../components/footer";
-import SmallProjectsSection from "../components/SmallProject";
+import SmallProjectsSection from "../components/Project/SmallProject";
 import { useEffect, useState } from "react";
 import { getMainProjects } from "../API/api";
 import Hyperspeed from "../components/ui/Hyperspeed";
@@ -66,7 +66,8 @@ export default function ProjectPage() {
   }, []);
   return (
     <>
-      <div className="fixed top-0 left-0 w-full h-full z-0">
+    
+       <div className="fixed top-0 left-0 w-full h-full z-[-1] ">
         <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
@@ -76,7 +77,7 @@ export default function ProjectPage() {
             lanesPerRoad: 4,
             fov: 90,
             fovSpeedUp: 150,
-            speedUp: 2,
+            speedUp: 5,
             carLightsFade: 0.4,
             totalSideLightSticks: 20,
             lightPairsPerRoadWay: 40,
@@ -108,7 +109,7 @@ export default function ProjectPage() {
       <div>
 
       <NavBar />
-      <div className=" bg-black py-16 px-8 ">
+      <div className="  py-16 px-8 ">
         <div className="mx-auto max-w-7xl">
           <h1 className="mb-8 font-mono text-3xl font-bold text-purple-500">
             #complete-apps

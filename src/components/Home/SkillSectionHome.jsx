@@ -1,6 +1,5 @@
-'use client'
 
-import { getSkills } from "../API/api";
+import { getSkills } from "../../API/api";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -51,7 +50,7 @@ export default function SkillsSection() {
   };
 
   return (
-    <section className="w-full py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 relative overflow-hidden">
+    <section className="w-full py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 relative overflow-hidden ">
       {/* Header */}
       <div className="max-w-screen-xl mx-auto">
         <div className="flex items-center gap-2 mb-6 sm:mb-8">
@@ -95,14 +94,14 @@ export default function SkillsSection() {
           {Object.entries(skills).map(([category, items], index) => (
             <motion.div 
               key={category} 
-              className="space-y-2"
+              className="space-y-2 "
               variants={itemVariants}
               custom={index}
             >
               <h3 className="text-white font-['Fira_Code'] capitalize text-sm sm:text-base mb-2">
                 {category}
               </h3>
-              <div className="border border-[#ABB2BF] p-2 sm:p-3 rounded-xl">
+              <div className="border border-[#ABB2BF] p-2 sm:p-3 rounded-xl  bg-black/80">
                 <p className="space-y-1 sm:space-y-2 text-[#ABB2BF] text-xs sm:text-sm font-['Fira_Code']">
                   {Array.isArray(items) && items.map((item, index) => (
                     <React.Fragment key={index}>

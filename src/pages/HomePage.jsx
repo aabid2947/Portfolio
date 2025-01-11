@@ -1,16 +1,15 @@
-'use client'
 
 import React from 'react'
 import { motion, useInView } from 'framer-motion'
 import NavBar from '../components/Navbar'
 import Footer from '../components/footer'
-import { HeroSection } from '../components/HeroSection'
-import { ProjectCard } from '../components/projectCard'
-import AboutSection from '../components/AboutSectionHome'
-import ContactSection from '../components/ContactSectionHome'
-import SkillsSection from '../components/HomeSkillSection'
-import { QuoteSection } from '../components/QuoteSection'
+import { HeroSection } from '../components/Home/HeroSection'
+import AboutSection from '../components//Home/AboutSectionHome'
+import ContactSection from '../components/Home/ContactSectionHome'
+import SkillsSection from '../components/Home/SkillSectionHome'
+import { QuoteSection } from '../components/Home/QuoteSection'
 import Hyperspeed from '../components/ui/Hyperspeed'
+import ProjectSectionHome from '../components/Home/ProjectSectionHome.jsx'
 
 const AnimatedSection = ({ children, direction }) => {
   const ref = React.useRef(null)
@@ -48,7 +47,7 @@ const AnimatedSection = ({ children, direction }) => {
 export default function HomePage() {
   return (
     <div className="relative">
-      <div className="fixed top-0 left-0 w-full h-full z-[-1]">
+      <div className="fixed top-0 left-0 w-full h-full z-[-1] ">
         <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
@@ -87,9 +86,10 @@ export default function HomePage() {
           }}
         />
       </div>
+      <div className='backdrop-blur-sm'>
       <NavBar />
       <AnimatedSection direction="up">
-        <HeroSection />
+        <HeroSection className='' />
       </AnimatedSection>
       <AnimatedSection direction="right">
         <QuoteSection />
@@ -98,12 +98,17 @@ export default function HomePage() {
         <SkillsSection />
       </AnimatedSection>
       <AnimatedSection direction="up">
+        <ProjectSectionHome />
+      </AnimatedSection>
+      <AnimatedSection direction="up">
         <AboutSection />
       </AnimatedSection>
       <AnimatedSection direction="left">
         <ContactSection />
       </AnimatedSection>
       <Footer />
+      </div>
+     
     </div>
   )
 }

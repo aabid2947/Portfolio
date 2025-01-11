@@ -1,13 +1,13 @@
-import ContactSection from '../components/ContactSection'
-import React from 'react'
-import NavBar from '../components/Navbar'
-import Footer from '../components/footer'
-import Hyperspeed from '../components/ui/Hyperspeed'
+import ContactSection from "../components/ContactSection";
+import React from "react";
+import NavBar from "../components/Navbar";
+import Footer from "../components/footer";
+import Hyperspeed from "../components/ui/Hyperspeed";
 
 export default function ContactPage() {
   return (
-    <div>
-        <div className="fixed top-0 left-0 w-full h-full z-0">
+    <div className="relative">
+      <div className="fixed top-0 left-0 w-full h-full z-[-1] ">
         <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
@@ -17,7 +17,7 @@ export default function ContactPage() {
             lanesPerRoad: 4,
             fov: 90,
             fovSpeedUp: 150,
-            speedUp: 2,
+            speedUp: 5,
             carLightsFade: 0.4,
             totalSideLightSticks: 20,
             lightPairsPerRoadWay: 40,
@@ -46,9 +46,11 @@ export default function ContactPage() {
           }}
         />
       </div>
-        <NavBar/>
-      <ContactSection/>
-      <Footer/>
+      <div className="background-blur-md h-screen">
+        <NavBar />
+        <ContactSection />
+        <Footer />
+      </div>
     </div>
-  )
+  );
 }

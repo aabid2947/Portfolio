@@ -2,7 +2,7 @@ import { DiscIcon as DiscordIcon, LinkedinIcon } from 'lucide-react'
 
 export default function ContactSection() {
   return (
-    <section className="w-full  py-16 px-8 relative">
+    <section className="w-full  py-16 px-8 relative ">
       {/* Dots decoration */}
       <div className="absolute left-8 top-12 opacity-20">
         <div className="grid grid-cols-3 gap-[6px]">

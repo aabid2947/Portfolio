@@ -1,4 +1,4 @@
-import ShinyText from "./ui/ShinyText"
+import ShinyText from "../ui/ShinyText"
 
 export function QuoteSection() {
     return (
@@ -11,7 +11,7 @@ export function QuoteSection() {
               <span className="absolute -bottom-4 -right-4 font-mono text-2xl text-[#C778DD]">#</span>
               
               {/* Quote content */}
-              <div className="border border-[#ABB2BF] p-8">
+              <div className="border backdrop-blur-md border-[#ABB2BF] p-8">
                 <p className="font-['Fira_Code'] text-[#ABB2BF]">
             <ShinyText text="With great power comes great electricity bill " disabled={false} speed={3} className='custom-class' />
             

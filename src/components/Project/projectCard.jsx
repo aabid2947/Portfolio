@@ -3,7 +3,7 @@ import { ArrowRight, Github } from 'lucide-react';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import DecayCard from './ui/DecayCard';
+import DecayCard from '../ui/DecayCard';
 
 export function ProjectCard({ project }) {
   const cld = new Cloudinary({ cloud: { cloudName: 'dscnmbhnf' } });

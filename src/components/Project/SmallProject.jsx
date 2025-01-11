@@ -51,7 +51,7 @@ const projects = [
 
 export default function SmallProjectsSection() {
   return (
-    <section className="w-full bg-black py-16 px-8">
+    <section className="w-full  py-16 px-8">
       <div className="max-w-screen-xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-2 mb-8">
