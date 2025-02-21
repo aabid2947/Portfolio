@@ -16,7 +16,6 @@ export default function ProjectSectionHome() {
       try {
         const fetchedProjects = await getMainProjects();
         if (fetchedProjects) {
-          console.log(fetchedProjects);
           setMainProjects(fetchedProjects);
         }
       } catch (error) {

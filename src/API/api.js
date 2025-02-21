@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 export const getSkills = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "Skills"));
-      console.log(querySnapshot)
+
       const skills = querySnapshot.docs.map(doc => doc.data());
       
       return skills;

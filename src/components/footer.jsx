@@ -12,7 +12,6 @@ export default function Footer() {
         const fetchedAboutme = await getAboutMe()
 
         if (fetchedAboutme) {
-          console.log(fetchedAboutme[0].socialLink)
           setSocialLink(fetchedAboutme[0].socialLink)
         }
       } catch (error) {

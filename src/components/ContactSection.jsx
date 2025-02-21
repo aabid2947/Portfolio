@@ -41,7 +41,7 @@ export default function ContactSection() {
                       @elias123
                     </p>
                     <p className="font-mono text-sm text-zinc-400">
-                      elias@elias.dev.nl
+                      aabidhussainpas@gmail.com
                     </p>
                   </div>
                 </div>
@@ -59,7 +59,7 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     className="font-mono text-sm text-zinc-400 hover:text-purple-500"
                   >
-                    @elias
+                    @Aabid
                   </a>
                   <a 
                     href="https://twitter.com" 
@@ -67,7 +67,7 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     className="font-mono text-sm text-zinc-400 hover:text-purple-500"
                   >
-                    @elias
+                    @Aabid
                   </a>
                 </div>
               </div>

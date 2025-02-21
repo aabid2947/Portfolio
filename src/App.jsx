@@ -1,6 +1,5 @@
 import React from "react";
 import HomePage from "./pages/HomePage";
-import Hyperspeed from './components/ui/Hyperspeed';
 
 function App() {
   return (
