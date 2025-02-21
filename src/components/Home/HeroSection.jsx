@@ -20,7 +20,7 @@ export function HeroSection() {
               <TypewriterComponent
                 onInit={(typewriter) => {
                   typewriter
-                    .typeString("Elias is a ")
+                    .typeString("AAbid is a ")
                     .typeString(
                       '<span class="text-purple-500">web designer</span>'
                     )

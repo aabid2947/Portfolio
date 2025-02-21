@@ -1,17 +1,37 @@
-import { Github, DiscIcon as Discord, Twitter } from 'lucide-react'
-
+import { Github, DiscIcon as Discord, Twitter ,Instagram } from 'lucide-react'
+import { getAboutMe } from '../API/api'
+import { useState,useEffect } from 'react'
 
 export default function Footer() {
+  const [socialLink,setSocialLink] = useState([])
+
+  useEffect(() => {
+    console.log("Fetching main projects")
+    const fetchSocialLinks = async () => {
+      try {
+        const fetchedAboutme = await getAboutMe()
+
+        if (fetchedAboutme) {
+          console.log(fetchedAboutme[0].socialLink)
+          setSocialLink(fetchedAboutme[0].socialLink)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchSocialLinks()
+  }, [])
+
   return (
     <footer className="border-t border-zinc-800 ">
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex flex-col items-center gap-2 md:items-start">
             <a href="/" className="font-mono text-lg font-bold text-white hover:text-purple-500">
-              # Elias
+              # Aabid
             </a>
             <p className="font-mono text-sm text-zinc-400">
-              elias@elias.dev.nl
+              aabidhussainpas@gmail.com
             </p>
             <p className="font-mono text-sm text-zinc-400">
               Web designer and front-end developer
@@ -22,7 +42,7 @@ export default function Footer() {
             <p className="font-mono text-sm text-zinc-400">Media</p>
             <div className="flex gap-4">
               <a 
-                href="https://github.com" 
+                href={socialLink.github}
                 target="_blank"
                 rel="noopener noreferrer" 
                 className="text-zinc-400 transition-colors hover:text-purple-500"
@@ -31,16 +51,16 @@ export default function Footer() {
                 <span className="sr-only">Github</span>
               </a>
               <a 
-                href="https://discord.com" 
+                href={socialLink.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-zinc-400 transition-colors hover:text-purple-500"
               >
-                <Discord className="h-5 w-5" />
-                <span className="sr-only">Discord</span>
+                <Instagram className="h-5 w-5" />
+                <span className="sr-only">Instagram</span>
               </a>
               <a 
-                href="https://twitter.com" 
+                href={socialLink.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-zinc-400 transition-colors hover:text-purple-500"
@@ -54,7 +74,7 @@ export default function Footer() {
 
         <div className="mt-8 text-center">
           <p className="font-mono text-sm text-zinc-400">
-            © Copyright 2022. Made by Elias
+            © Copyright 2025. Made by Aabid
           </p>
         </div>
       </div>

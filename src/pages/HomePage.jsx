@@ -89,7 +89,7 @@ export default function HomePage() {
       <div className='backdrop-blur-sm'>
       <NavBar />
       <AnimatedSection direction="up">
-        <HeroSection className='' />
+        <HeroSection />
       </AnimatedSection>
       <AnimatedSection direction="right">
         <QuoteSection />

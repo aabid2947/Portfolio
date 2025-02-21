@@ -11,11 +11,9 @@ export default function SkillsSection() {
     const fetchSkills = async () => {
       try {
         const skill = await getSkills();
-        console.log(skill)
         if (skill) {
           setSkills(skill[0]);
         }
-        console.log(skill[0]);
       } catch (error) {
         console.error("Error fetching skills: ", error);
       }
@@ -50,39 +48,25 @@ export default function SkillsSection() {
   };
 
   return (
-    <section className="w-full py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 relative overflow-hidden ">
+    <section className="min-h-[400px] relative overflow-hidden px-8 py-8 md:px-8 ">
       {/* Header */}
       <div className="max-w-screen-xl mx-auto">
         <div className="flex items-center gap-2 mb-6 sm:mb-8">
-          <h2 className="font-['Fira_Code'] text-[#C778DD] text-base sm:text-lg">#skills</h2>
+          <h2 className="font-mono text-[#C778DD]  text-base text-lg lg:text-3xl">#skills</h2>
           <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-[#C778DD]" />
         </div>
 
         {/* Decorative Shapes */}
-        <div className="absolute left-4 sm:left-8 top-12 sm:top-24 opacity-50 sm:opacity-100">
-          {/* Dots Grid */}
-          <div className="grid grid-cols-4 sm:grid-cols-6 gap-[4px] sm:gap-[6px]">
-            {[...Array(24)].map((_, i) => (
-              <div key={i} className="w-[2px] h-[2px] sm:w-[3px] sm:h-[3px] bg-zinc-400 rounded-full" />
-            ))}
-          </div>
-          
-          {/* Square Shapes */}
-          <div className="relative mt-8 sm:mt-12 hidden sm:block">
-            <div className="absolute top-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border border-[#C778DD] opacity-50" />
-            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 w-8 h-8 sm:w-12 sm:h-12 border border-[#C778DD] opacity-50" />
-            <div className="absolute top-6 left-6 sm:top-8 sm:left-8 w-8 h-8 sm:w-12 sm:h-12 border border-[#C778DD] opacity-50" />
-          </div>
-        </div>
+        
 
         {/* Additional Dots */}
-        <div className="absolute right-4 sm:right-12 bottom-8 sm:bottom-12 opacity-20 sm:opacity-40">
+        {/* <div className="absolute right-4 sm:right-12 bottom-8 sm:bottom-12 opacity-20 sm:opacity-40">
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-[4px] sm:gap-[6px]">
             {[...Array(12)].map((_, i) => (
               <div key={i} className="w-[2px] h-[2px] sm:w-[3px] sm:h-[3px] bg-zinc-400 rounded-full" />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Skills Grid */}
         <motion.div 

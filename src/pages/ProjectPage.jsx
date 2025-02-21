@@ -1,49 +1,11 @@
-import { ProjectCard } from "../components/Project/projectCard";
+import { ProjectCard } from "../components/projectCard";
 import NavBar from "../components/Navbar";
 import Footer from "../components/footer";
 import SmallProjectsSection from "../components/Project/SmallProject";
 import { useEffect, useState } from "react";
 import { getMainProjects } from "../API/api";
 import Hyperspeed from "../components/ui/Hyperspeed";
-
-const projects = [
-  {
-    title: "ChertNodes",
-    description: "Minecraft servers hosting",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["HTML", "SCSS", "Python", "Flask"],
-    hasLive: true,
-    hasCached: true,
-  },
-  {
-    title: "Kahoot Answers Viewer",
-    description: "Get answers to your kahoot quiz",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["CSS", "Express", "Node.js"],
-    hasLive: true,
-  },
-  {
-    title: "ProtectX",
-    description: "Discord anti-crash bot",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["React", "Express", "Discord.js", "Node.js"],
-    hasCached: true,
-  },
-  {
-    title: "Kotik Bot",
-    description: "Multi-functional discord bot",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["HTML", "CSS", "JS"],
-    hasLive: true,
-  },
-  {
-    title: "Portfolio",
-    description: "You're using it rn",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Vue", "TS", "Less"],
-    hasGithub: true,
-  },
-];
+import { motion } from "framer-motion";
 
 export default function ProjectPage() {
   const [mainProjets, setMainProjects] = useState([]);
@@ -53,7 +15,6 @@ export default function ProjectPage() {
     const fetchMainProjects = async () => {
       try {
         const mainProjets = await getMainProjects();
-
         if (mainProjets) {
           console.log(mainProjets);
           setMainProjects(mainProjets);
@@ -64,10 +25,10 @@ export default function ProjectPage() {
     };
     fetchMainProjects();
   }, []);
+
   return (
     <>
-    
-       <div className="fixed top-0 left-0 w-full h-full z-[-1] ">
+      <div className="fixed top-0 left-0 w-full h-full z-[-1]">
         <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
@@ -107,22 +68,26 @@ export default function ProjectPage() {
         />
       </div>
       <div>
-
-      <NavBar />
-      <div className="  py-16 px-8 ">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="mb-8 font-mono text-3xl font-bold text-purple-500">
-            #complete-apps
-          </h1>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {mainProjets.map((project) => (
-              <ProjectCard key={project.Name} project={project} />
-            ))}
+        <NavBar />
+        <div className="py-16 px-8">
+          <div className="mx-auto max-w-7xl">
+            <h1 className="mb-8 font-mono text-3xl font-bold text-purple-500">#complete-apps</h1>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {mainProjets.map((project) => (
+                <motion.div
+                  key={project.Name}
+                  whileHover={{ x: 8,y:-8, boxShadow: "0px 10px 30px rgb(0, 2, 48)" }}
+                  transition={{ duration: 0.2 }}
+                  className="rounded-lg overflow-hidden"
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      <SmallProjectsSection />
-      <Footer />
+        <SmallProjectsSection />
+        <Footer />
       </div>
     </>
   );

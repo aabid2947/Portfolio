@@ -21,10 +21,16 @@ export default function AboutSection() {
             ))}
           </div>
         </div>
-  
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+  <div className='w-full py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 relative overflow-hidden '>
+
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center font-mono">
           <div className="space-y-6">
-            <h2 className="text-purple-400 text-lg font-mono">#about-me</h2>
+            <div className='flex items-center'>
+
+            <h2 className="text-purple-400 font-mono text-lg lg:text-3xl ">#about-me</h2>
+            <div className="m-1 h-[1px] w-16 sm:w-24 md:w-32 bg-[#C778DD]" />
+            </div>
+
             
             <div className="space-y-4 text-gray-300 ">
               <p className="text-xl">Hello, I&apos;m Elias!</p>
@@ -76,6 +82,7 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
+  </div>
       </div>
     )
   }

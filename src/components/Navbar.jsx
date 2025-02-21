@@ -38,7 +38,7 @@ export default function NavMenu() {
             </li>
             <li>
               <Link
-                to="/"
+                to="/about-me"
                 className="font-mono text-zinc-400 hover:text-purple-500"
               >
                 #about-me

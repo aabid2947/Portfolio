@@ -1,30 +1,30 @@
-
-import React, { useState, useEffect } from "react"
-import { getMainProjects } from "../../API/api"
-import { ProjectCard } from "./projectCard"
-import Slider from "react-slick"
-import { motion } from "framer-motion"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import React, { useState, useEffect } from "react";
+import { getMainProjects } from "../../API/api";
+import { ProjectCard } from "../projectCard";
+import Slider from "react-slick";
+import { motion } from "framer-motion";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 export default function ProjectSectionHome() {
-  const [mainProjects, setMainProjects] = useState([])
+  const [mainProjects, setMainProjects] = useState([]);
 
   useEffect(() => {
-    console.log("Fetching main projects")
+    console.log("Fetching main projects");
     const fetchMainProjects = async () => {
       try {
-        const fetchedProjects = await getMainProjects()
+        const fetchedProjects = await getMainProjects();
         if (fetchedProjects) {
-          console.log(fetchedProjects)
-          setMainProjects(fetchedProjects)
+          console.log(fetchedProjects);
+          setMainProjects(fetchedProjects);
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    fetchMainProjects()
-  }, [])
+    };
+    fetchMainProjects();
+  }, []);
 
   const settings = {
     dots: true,
@@ -45,7 +45,7 @@ export default function ProjectSectionHome() {
         },
       },
     ],
-  }
+  };
 
   return (
     <div className="w-full py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 relative overflow-hidden ">
@@ -54,9 +54,22 @@ export default function ProjectSectionHome() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-8 font-mono text-3xl font-bold text-purple-500"
+          className="mb-8 font-mono text-3xl font-bold text-purple-500 flex justify-between items-center"
         >
-          #complete-apps
+          <div className="flex flex-row w-[80%] items-center">
+            #projects
+            <div className="m-1 h-[1px] w-16 sm:w-24 md:w-32 bg-[#C778DD]" />
+
+          </div>
+
+          <Link
+            to="/works"
+            className="hover:border border-zinc-500 p-1 rounded-lg cursor-pointer"
+          >
+            <p className="text-sm font-mono text-zinc-500 whitespace-nowrap">
+              View all ~~>
+            </p>
+          </Link>
         </motion.h1>
         <Slider {...settings}>
           {mainProjects.map((project, index) => (
@@ -75,7 +88,5 @@ export default function ProjectSectionHome() {
         </Slider>
       </div>
     </div>
-  )
-  
+  );
 }
-

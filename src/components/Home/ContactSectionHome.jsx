@@ -1,6 +1,27 @@
-import { DiscIcon as DiscordIcon, LinkedinIcon } from 'lucide-react'
+import { Instagram, LinkedinIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { getAboutMe } from '../../API/api'
 
 export default function ContactSection() {
+  const [socialLink,setSocialLink] = useState([])
+
+  useEffect(() => {
+    console.log("Fetching main projects")
+    const fetchSocialLinks = async () => {
+      try {
+        const fetchedAboutme = await getAboutMe()
+
+        if (fetchedAboutme) {
+          console.log(fetchedAboutme[0].socialLink)
+          setSocialLink(fetchedAboutme[0].socialLink)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchSocialLinks()
+  }, [])
+
   return (
     <section className="w-full  py-16 px-8 relative ">
       {/* Dots decoration */}
@@ -16,12 +37,12 @@ export default function ContactSection() {
         <div className="flex flex-col gap-8">
           {/* Header */}
           <div className="flex items-center gap-2">
-            <h2 className="font-mono text-[#C778DD] text-base">#contacts</h2>
+            <h2 className="font-mono text-[#C778DD] text-base text-lg lg:text-3xl">#contacts</h2>
             <div className="h-[1px] w-32 bg-[#C778DD]" />
           </div>
 
           {/* Content */}
-          <div className="flex flex-col md:flex-row justify-between gap-8">
+          <div className="flex flex-col md:flex-row justify-between gap-8 font-mono">
             <p className="text-[#ABB2BF] text-base max-w-md">
               I'm interested in freelance opportunities. However,
               if you have other request or question, don't hesitate to contact me
@@ -30,16 +51,22 @@ export default function ContactSection() {
             {/* Contact buttons */}
             <div className="flex flex-col gap-2">
               <div className="border border-[#ABB2BF] p-4">
+                <a href={socialLink.instagram} target="_blank">
+
                 <div className="flex items-center gap-2 text-[#ABB2BF]">
-                  <DiscordIcon className="w-5 h-5" />
-                  <span className="text-sm">!elias#3519</span>
+                  <Instagram className="w-5 h-5" />
+                  <span className="text-sm">!aabid2947</span>
                 </div>
+                </a>
               </div>
               <div className="border border-[#ABB2BF] p-4">
+                <a href={socialLink.linkedin} target="_blank" >
+
                 <div className="flex items-center gap-2 text-[#ABB2BF]">
                   <LinkedinIcon className="w-5 h-5" />
-                  <span className="text-sm">@elias</span>
+                  <span className="text-sm">@aabid</span>
                 </div>
+                </a>
               </div>
             </div>
           </div>
