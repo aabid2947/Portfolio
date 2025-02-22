@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ContactPage from './pages/ContactPage.jsx'
-import ProjectPage from './pages/projectPage.jsx';
+import ProjectPage from './pages/ProjectPage.jsx';
 import AboutMe from './pages/AboutMe.jsx';
 
 

@@ -6,6 +6,7 @@ import Hyperspeed from "../components/ui/Hyperspeed";
 import AboutSection from "@/components/AboutMe/about-section";
 import SkillsSection from "@/components/AboutMe/skills-section";
 import FunFactsSection from "@/components/AboutMe/fun-facts-section";
+import EducationTimeline from "../components/AboutMe/education-section";
 
 export default function ContactPage() {
   return (
@@ -52,6 +53,7 @@ export default function ContactPage() {
       <div className="background-blur-md h-screen flex flex-col space-y-8">
         <NavBar />
         <AboutSection />
+        {/* <EducationTimeline/> */}
         <SkillsSection />
         <FunFactsSection />
         <Footer />

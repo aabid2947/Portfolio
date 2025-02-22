@@ -1,12 +1,12 @@
-
-
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom";
 import { FaGithub, FaDribbble, FaFigma } from 'react-icons/fa';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Menu } from 'lucide-react'
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Menu } from 'lucide-react';
 
 export default function NavMenu() {
+  const location = useLocation();
+
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-zinc-800 bg-black/50 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4">
@@ -15,43 +15,28 @@ export default function NavMenu() {
             to="/"
             className="font-mono text-lg font-bold text-white hover:text-purple-500"
           >
-            # Elias
+            # Aabid
           </Link>
 
           {/* Desktop Navigation */}
           <ul className="hidden sm:flex items-center gap-6">
-            <li>
-              <Link
-                to="/"
-                className="font-mono text-purple-500 hover:text-purple-400"
-              >
-                #home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/works"
-                className="font-mono text-zinc-400 hover:text-purple-500"
-              >
-                #works
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about-me"
-                className="font-mono text-zinc-400 hover:text-purple-500"
-              >
-                #about-me
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className="font-mono text-zinc-400 hover:text-purple-500"
-              >
-                #contacts
-              </Link>
-            </li>
+            {[
+              { path: "/", label: "#home" },
+              { path: "/works", label: "#works" },
+              { path: "/about-me", label: "#about-me" },
+              { path: "/contact", label: "#contacts" },
+            ].map(({ path, label }) => (
+              <li key={path}>
+                <Link
+                  to={path}
+                  className={`font-mono ${
+                    location.pathname === path ? "text-purple-500" : "text-zinc-400"
+                  } hover:text-purple-500`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
           </ul>
 
           <div className="flex items-center gap-4">
@@ -62,52 +47,37 @@ export default function NavMenu() {
             {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
+                <Button
+                  variant="ghost"
+                  size="icon"
                   className="sm:hidden text-zinc-400 hover:text-purple-500"
                 >
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent 
-                side="right" 
+              <SheetContent
+                side="right"
                 className="w-64 border-zinc-800 bg-black/95 backdrop-blur-sm p-6"
               >
                 <nav className="flex flex-col h-full">
                   <ul className="flex flex-col gap-6 py-4">
-                    <li>
-                      <Link
-                        to="/"
-                        className="font-mono text-purple-500 hover:text-purple-400"
-                      >
-                        #home
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/works"
-                        className="font-mono text-zinc-400 hover:text-purple-500"
-                      >
-                        #works
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/"
-                        className="font-mono text-zinc-400 hover:text-purple-500"
-                      >
-                        #about-me
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/contact"
-                        className="font-mono text-zinc-400 hover:text-purple-500"
-                      >
-                        #contacts
-                      </Link>
-                    </li>
+                    {[
+                      { path: "/", label: "#home" },
+                      { path: "/works", label: "#works" },
+                      { path: "/about-me", label: "#about-me" },
+                      { path: "/contact", label: "#contacts" },
+                    ].map(({ path, label }) => (
+                      <li key={path}>
+                        <Link
+                          to={path}
+                          className={`font-mono ${
+                            location.pathname === path ? "text-purple-500" : "text-zinc-400"
+                          } hover:text-purple-500`}
+                        >
+                          {label}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
 
                   <div className="mt-auto">
@@ -133,6 +103,5 @@ export default function NavMenu() {
         </nav>
       </div>
     </header>
-  )
+  );
 }
-

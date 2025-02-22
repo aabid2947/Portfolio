@@ -40,3 +40,16 @@ export const getMainProjects = async () => {
       throw new Error('Failed to fetch main projects'); // Re-throw the error or return a specific message
     }
   };
+
+  export const getMinorProjects = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "smallProjects"));
+     
+      const smallProjects = querySnapshot.docs.map(doc => doc.data());
+      
+      return smallProjects;
+    } catch (err) {
+      console.error("Error fetching main projects: ", err);
+      throw new Error('Failed to fetch main projects'); // Re-throw the error or return a specific message
+    }
+  };

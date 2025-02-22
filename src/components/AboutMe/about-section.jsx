@@ -2,15 +2,15 @@ import HeroImage from "../../assets/HeroSectionImage.png"
 
 export default function AboutSection() {
   return (
-    <section className="  text-gray-300 p-8">
-      <div className="max-w-4xl mx-auto">
+    <section className="w-full  py-16 px-8 mx-auto text-gray-300 relative ">
+      <div className="mx-auto max-w-7xl relative">
         <h1 className="text-xl font-mono mb-6 text-white">/about-me</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
             <p className="font-mono tracking-wider text-md">Hello, I&apos;m Aabid!</p>
             <p className="font-mono  tracking-wider  text-md">
-              I&apos;m a self-taught front-end developer based in [city]. Focused on delivering responsive web
+              I&apos;m a self-taught front-end developer based in Delhi, India. Focused on delivering responsive web
               applications that are both user-friendly and aesthetically pleasing.
             </p>
             <p className="font-mono tracking-wider text-md">

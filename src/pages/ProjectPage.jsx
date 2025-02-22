@@ -1,31 +1,10 @@
-import { ProjectCard } from "../components/projectCard";
 import NavBar from "../components/Navbar";
 import Footer from "../components/footer";
 import SmallProjectsSection from "../components/Project/SmallProject";
-import { useEffect, useState } from "react";
-import { getMainProjects } from "../API/api";
 import Hyperspeed from "../components/ui/Hyperspeed";
-import { motion } from "framer-motion";
+import MainProjects from "../components/Project/MainProjects"
 
 export default function ProjectPage() {
-  const [mainProjets, setMainProjects] = useState([]);
-
-  useEffect(() => {
-    console.log("Fetching main projects");
-    const fetchMainProjects = async () => {
-      try {
-        const mainProjets = await getMainProjects();
-        if (mainProjets) {
-          console.log(mainProjets);
-          setMainProjects(mainProjets);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMainProjects();
-  }, []);
-
   return (
     <>
       <div className="fixed top-0 left-0 w-full h-full z-[-1]">
@@ -69,23 +48,7 @@ export default function ProjectPage() {
       </div>
       <div>
         <NavBar />
-        <div className="py-16 px-8">
-          <div className="mx-auto max-w-7xl">
-            <h1 className="mb-8 font-mono text-3xl font-bold text-purple-500">#complete-apps</h1>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {mainProjets.map((project) => (
-                <motion.div
-                  key={project.Name}
-                  whileHover={{ x: 8,y:-8, boxShadow: "0px 10px 30px rgb(0, 2, 48)" }}
-                  transition={{ duration: 0.2 }}
-                  className="rounded-lg overflow-hidden"
-                >
-                  <ProjectCard project={project} />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <MainProjects/>
         <SmallProjectsSection />
         <Footer />
       </div>

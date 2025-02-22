@@ -20,13 +20,13 @@ export function HeroSection() {
               <TypewriterComponent
                 onInit={(typewriter) => {
                   typewriter
-                    .typeString("AAbid is a ")
+                    .typeString("Aabid is a ")
                     .typeString(
                       '<span class="text-purple-500">web designer</span>'
                     )
                     .typeString(" and ")
                     .typeString(
-                      '<span class="text-purple-500">front-end developer</span>'
+                      '<span class="text-purple-500">Full Stack developer</span>'
                     )
                     .callFunction(() => setIsTypingComplete(true))
                     .start();

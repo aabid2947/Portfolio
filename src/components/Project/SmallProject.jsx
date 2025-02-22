@@ -1,58 +1,60 @@
-const projects = [
-  {
-    name: "Bot boilerplate",
-    description: "Start creating scalable Discord.js bot with TypeScript template.",
-    tech: "Discord.js ts",
-    link: { text: "Github >>", url: "#" }
-  },
-  {
-    name: "My blog",
-    description: "Front-end of my future blog website written in React.",
-    tech: "React",
-    link: { text: "Github >>", url: "#" }
-  },
-  {
-    name: "Chess pro",
-    description: "Simple landing page about something. For learning Sass.",
-    tech: "Figma",
-    link: { text: "Figma >>", url: "#" }
-  },
-  {
-    name: "Crash protect website",
-    description: "Simple website about anti-raid, anti-crash Discord bot.",
-    tech: "Figma",
-    link: { text: "Figma >>", url: "#" }
-  },
-  {
-    name: "CSS experiments",
-    description: "Collection of CSS snippets and experiments.",
-    tech: "HTML CSS",
-    link: { text: "Live >>", url: "#" }
-  },
-  {
-    name: "Web Dev nvim config",
-    description: "Config for Neovim perfect for web development.",
-    tech: "Lua",
-    link: { text: "Github >>", url: "#" }
-  },
-  {
-    name: "Ooku",
-    description: "Discord file converter with rich features.",
-    tech: "Python",
-    link: { text: "Live >>", url: "#" }
-  },
-  {
-    name: "School website",
-    description: "Simple website template for my school.",
-    tech: "Figma",
-    link: { text: "Figma >>", url: "#" }
-  }
-]
+import { useEffect, useState } from "react"
+import { getMinorProjects } from "../../API/api"
+import { motion } from "framer-motion";
+import { GlowButton } from "@/components/ui/glow-button";
+
+
+
 
 export default function SmallProjectsSection() {
+  const [minorProjects, setMinorProjects] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchMinorProjects = async () => {
+      try {
+
+        const minorProjects = await getMinorProjects()
+
+        if (minorProjects) {
+          console.log(minorProjects)
+          setLoading(false)
+          setMinorProjects(minorProjects)
+        }
+      } catch (error) {
+        console.log("Error in fetching minor projeccts", error)
+      }
+    }
+    fetchMinorProjects()
+  }, [])
+
+
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen bg-black">
+      <div className="flex space-x-2">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 bg-white rounded-full"
+            animate={{
+              opacity: [0.3, 1, 0.3],
+              y: [-5, 5, -5],
+            }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.2,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  }
+
   return (
     <section className="w-full  py-16 px-8">
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-2 mb-8">
           <h2 className="font-['Fira_Code'] text-[#C778DD] text-base">#small-projects</h2>
@@ -61,31 +63,32 @@ export default function SmallProjectsSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects.map((project, index) => (
-            <div 
-              key={index} 
+          {minorProjects.map((project, index) => (
+            <div
+              key={index}
               className="border border-[#ABB2BF] group hover:border-[#C778DD] transition-colors"
             >
               <div className="p-4 space-y-4">
                 <div className="space-y-2">
                   <h3 className="font-['Fira_Code'] text-white text-lg">
-                    {project.name}
+                    {project.Name}
                   </h3>
                   <p className="text-[#ABB2BF] text-sm min-h-[40px]">
-                    {project.description}
+                    {project.Desc}
                   </p>
                 </div>
-                <div className="border border-[#ABB2BF] inline-block px-2 py-1">
-                  <span className="text-[#ABB2BF] text-sm font-['Fira_Code']">
-                    {project.tech}
-                  </span>
+                <div className="border border-[#ABB2BF] text-white font-['Fira_Code'] tracking-wider  inline-block px-2 py-1 rounded-sm">
+                  {project.tech.map((tech) =>
+                  (
+                    <span key={tech}>{tech}, </span>
+                  )
+                  )}
                 </div>
                 <div>
-                  <a 
-                    href={project.link.url}
-                    className="text-[#ABB2BF] text-sm font-['Fira_Code'] hover:text-[#C778DD] transition-colors"
-                  >
-                    {project.link.text}
+                  <a href={project.githubLink} target="_blank">
+                    <GlowButton variant="cached">
+                      GitRepo <span className="ml-2">↗</span>
+                    </GlowButton>
                   </a>
                 </div>
               </div>
