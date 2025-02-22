@@ -53,7 +53,7 @@ export default function FunFactsSection() {
       <div className="max-w-7xl mx-auto">
         <h2 className="text-xl font-mono mb-6 text-white">#my-fun-facts</h2>
 
-        <div className="flex flex-wrap gap-3 max-w-3xl mx-auto ml-16">
+        <div className="flex flex-wrap gap-3 max-w-3xl mx-auto">
           {funFacts.map((fact) => (
             <span
               key={fact}
