@@ -1,4 +1,5 @@
 import Img from '../../assets/Group 50.png';
+import { Link, useLocation } from "react-router-dom";
 
 
 export default function AboutSection() {
@@ -26,10 +27,10 @@ export default function AboutSection() {
 
 
             <div className="space-y-4 text-gray-300 ">
-              <p className="text-xl">Hello, I&apos;m Elias!</p>
+              <p className="text-xl">Hello, I&apos;m Aabid!</p>
 
               <p className="text-sm leading-relaxed">
-                I&apos;m a self-taught front-end developer based in Kyiv, Ukraine. I can develop responsive websites from
+                I&apos;m a self-taught Full Stack developer based in Delhi, India. I can develop responsive websites from
                 scratch and raise them into modern user-friendly web experiences.
               </p>
 
@@ -39,22 +40,25 @@ export default function AboutSection() {
                 newest technologies and frameworks.
               </p>
 
-              <button className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors">
-                <span>Read more</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </button>
+              <Link to="/about-me">
+                <button className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors">
+                  <span>Read more</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </button>
+              </Link>
+
             </div>
           </div>
 

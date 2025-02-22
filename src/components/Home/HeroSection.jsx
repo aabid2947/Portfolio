@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TypewriterComponent from "typewriter-effect";
 import HeroImage from "../../assets/HeroSectionImage.png";
+import { getAboutMe } from "../../API/api";
 import {
   Modal,
   ModalTrigger,
@@ -9,6 +10,18 @@ import {
 
 export function HeroSection() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [resumeLink,setResumeLink] = useState("")
+
+  useEffect(()=>{
+    const fetchResume= async ( ) =>{
+      const aboutMe = await getAboutMe()
+      if (aboutMe){
+        console.log(aboutMe)
+        setResumeLink(aboutMe[0].Resume)
+      }
+    }
+    fetchResume()
+  },[])
 
   return (
     <div className="relative min-h-screen px-8 py-16 ">
@@ -65,13 +78,15 @@ export function HeroSection() {
               whileTap={{ scale: 0.95 }}
             >
                <Modal>
-              <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
+               <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
                 <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
                   See My Resume
                 </span>
-                <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
-                Dwonload 
-                </div>
+                <a href={resumeLink} target="_blank" download rel="noopener noreferrer">
+                  <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
+                    Download
+                  </div>
+                </a>
               </ModalTrigger>
             
             </Modal>
