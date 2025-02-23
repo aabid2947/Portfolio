@@ -53,7 +53,7 @@ export default function ContactPage() {
       <div className="background-blur-md h-screen flex flex-col space-y-8">
         <NavBar />
         <AboutSection />
-        {/* <EducationTimeline/> */}
+        <EducationTimeline/>
         <SkillsSection />
         <FunFactsSection />
         <Footer />

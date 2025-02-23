@@ -12,7 +12,6 @@ export default function FunFactsSection() {
     async function fetchFunFacts() {
       try {
         const facts = await getAboutMe();
-        console.log(facts)
         setFunFacts(facts[0].FunFacts)
         setLoading(false)
       } catch (error) {

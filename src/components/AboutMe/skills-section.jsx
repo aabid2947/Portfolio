@@ -16,7 +16,6 @@ export default function SkillsSection() {
           setSkills(skill[0]);
           setLoading(false);
         }
-        console.log(skill[0]);
       } catch (error) {
         console.error("Error fetching skills: ", error);
       }

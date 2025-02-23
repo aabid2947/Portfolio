@@ -6,7 +6,7 @@ export default function Footer() {
   const [socialLink,setSocialLink] = useState([])
 
   useEffect(() => {
-    console.log("Fetching main projects")
+    console.log("Fetching About me")
     const fetchSocialLinks = async () => {
       try {
         const fetchedAboutme = await getAboutMe()
