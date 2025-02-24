@@ -9,27 +9,35 @@ import {
 import ContactPage from './pages/ContactPage.jsx'
 import ProjectPage from './pages/ProjectPage.jsx';
 import AboutMe from './pages/AboutMe.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx'
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
+    errorElement:<ErrorBoundary/>
    
   },
   {
     path: "/contact",
     element: <ContactPage/>,
+    errorElement:<ErrorBoundary/>
+
    
   },
    {
     path: "/works",
     element: <ProjectPage/>,
+    errorElement:<ErrorBoundary/>
+
    
   },
   {
     path: "/about-me",
     element: <AboutMe/>,
+    errorElement:<ErrorBoundary/>
+
    
   }
 ]);

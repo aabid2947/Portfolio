@@ -26,7 +26,7 @@ export default function MainProjets() {
     }, []);
 
     if (loading) {
-        return <div className="flex items-center justify-center h-screen bg-black">
+        return <div className="flex items-center justify-center h-screen ">
         <div className="flex space-x-2">
           {[...Array(5)].map((_, i) => (
             <motion.div
