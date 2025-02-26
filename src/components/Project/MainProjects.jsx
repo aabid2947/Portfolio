@@ -31,7 +31,7 @@ export default function MainProjets() {
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
-              className="w-2 h-2 bg-white rounded-full"
+              className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-300"
               animate={{
                 opacity: [0.3, 1, 0.3],
                 y: [-5, 5, -5],

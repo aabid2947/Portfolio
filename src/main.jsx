@@ -10,6 +10,7 @@ import ContactPage from './pages/ContactPage.jsx'
 import ProjectPage from './pages/ProjectPage.jsx';
 import AboutMe from './pages/AboutMe.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
     errorElement:<ErrorBoundary/>
 
    
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   }
 ]);
 
