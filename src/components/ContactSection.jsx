@@ -3,7 +3,7 @@ import { FaInstagram, FaLinkedin, FaGithub, FaEnvelope,FaTwitter  } from "react-
 export default function ContactSection() {
   return (
     <div className="min-h-screen px-8 py-24">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl w-[50%]">
         <div className="space-y-12">
           {/* Header */}
           <div className="space-y-4">
@@ -17,7 +17,7 @@ export default function ContactSection() {
 
           {/* Main content */}
           <div className="space-y-12">
-            <p className="max-w-2xl font-mono text-zinc-400">
+            <p className="max-w-3xl font-mono text-zinc-400">
               I'm interested in freelance opportunities. However,
               if you have other request or question, don't
               hesitate to contact me

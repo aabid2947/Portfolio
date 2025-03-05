@@ -46,7 +46,7 @@ export default function ContactPage() {
           }}
         />
       </div>
-      <div className="background-blur-md h-screen">
+      <div className="backdrop-blur-sm ">
         <NavBar />
         <ContactSection />
         <Footer />
