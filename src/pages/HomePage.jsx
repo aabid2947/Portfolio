@@ -86,8 +86,8 @@ export default function HomePage() {
           }}
         />
       </div>
-      <div className='backdrop-blur-sm'>
       <NavBar />
+      <div className='backdrop-blur-sm'>
       <AnimatedSection direction="up">
         <HeroSection />
       </AnimatedSection>
