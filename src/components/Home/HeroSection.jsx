@@ -10,21 +10,21 @@ import {
 
 export function HeroSection() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const [resumeLink,setResumeLink] = useState("")
+  const [resumeLink,setResumeLink] = useState("https://drive.google.com/file/d/1-2TvtoLje_3Cz4cVracgFNJwJB8ATjKt/view?usp=drive_link")
 
-  useEffect(()=>{
-    const fetchResume= async ( ) =>{
-      const aboutMe = await getAboutMe()
-      if (aboutMe){
-        console.log(aboutMe)
-        setResumeLink(aboutMe[0].Resume)
-      }
-    }
-    fetchResume()
-  },[])
+  // useEffect(()=>{
+  //   const fetchResume= async ( ) =>{
+  //     const aboutMe = await getAboutMe()
+  //     if (aboutMe){
+  //       console.log(aboutMe)
+  //       setResumeLink(aboutMe[0].Resume)
+  //     }
+  //   }
+  //   fetchResume()
+  // },[])
 
   return (
-    <div className="relative min-h-screen px-8 py-16 ">
+    <div className="relative  px-8 py-16 ">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           {/* Intro */}

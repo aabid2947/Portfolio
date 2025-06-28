@@ -1,122 +1,72 @@
-
-import { getSkills } from "../../API/api";
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
+// Import icons from lucide-react
+import { Framer, Code, Layers } from 'lucide-react'; 
 
 export default function SkillsSection() {
-  const [skills, setSkills] = useState({});
+  // 1. Updated data structure to include optional icons
+  const skills = [
+    { name: 'AFTER EFFECTS', icon: <Layers size={20} /> },
+    { name: 'ADVANCED PROTOTYPING' },
+    { name: 'FRAMER', icon: <Framer size={20} /> },
+    { name: 'REACT' },
+    { name: 'NEXT.JS' },
+    { name: 'TAILWIND CSS' },
+    { name: 'JAVASCRIPT' },
+    { name: 'TYPESCRIPT' },
+    { name: 'PYTHON' },
+    { name: 'DOCKER' },
+    { name: 'FIREBASE' },
+  ];
 
-  useEffect(() => {
-    console.log("Fetching skills");
-    const fetchSkills = async () => {
-      try {
-        const skill = await getSkills();
-        if (skill) {
-          setSkills(skill[0]);
-        }
-      } catch (error) {
-        console.error("Error fetching skills: ", error);
-      }
-    };
-    fetchSkills();
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
+  const marqueeVariants = {
+    animate: {
+      x: [0, '-100%'], // Animate from start to the point where the first set is off-screen
       transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: (i) => ({
-      x: i % 2 === 0 ? -50 : 50,
-      opacity: 0
-    }),
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
+        x: {
+          repeat: Infinity,
+          repeatType: 'loop',
+          duration: 30, // Controls the speed of the scroll
+          ease: 'linear',
+        },
+      },
+    },
   };
 
   return (
-    <section className="min-h-[400px] relative overflow-hidden px-8 py-8 md:px-8 ">
-      {/* Header */}
-      <div className="max-w-screen-xl mx-auto">
-        <div className="flex items-center gap-2 mb-6 sm:mb-8">
-          <h2 className="font-mono text-[#C778DD]  text-base text-lg lg:text-3xl">#skills</h2>
-          <div className="h-[1px] w-16 sm:w-24 md:w-32 bg-[#C778DD]" />
-        </div>
+    <section className=" relative w-full py-20 overflow-hidden">
+      <div className="max-w-screen-xl mx-auto flex flex-col items-start px-4">
+        {/* Header aligned to the left */}
+        <h2 className="text-3xl font-bold text-yellow-300 mb-10 self-start">
+          TECH STACK
+        </h2>
 
-        {/* Decorative Shapes */}
-        
-
-        {/* Additional Dots */}
-        {/* <div className="absolute right-4 sm:right-12 bottom-8 sm:bottom-12 opacity-20 sm:opacity-40">
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-[4px] sm:gap-[6px]">
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className="w-[2px] h-[2px] sm:w-[3px] sm:h-[3px] bg-zinc-400 rounded-full" />
+        {/* 2. The Marquee Container */}
+        <div className="w-full overflow-hidden">
+          <motion.div
+            className="flex gap-6 whitespace-nowrap" // Use flex and gap for spacing
+            variants={marqueeVariants}
+            animate="animate"
+            // Pause animation on hover
+            whileHover={{ transition: { duration: 0 } }} 
+          >
+            {/* 3. Render the skills list TWICE for a seamless loop */}
+            {[...skills, ...skills].map((skill, index) => (
+              <SkillTag key={index} name={skill.name} icon={skill.icon} />
             ))}
-          </div>
-        </div> */}
-
-        {/* Skills Grid */}
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto sm:ml-16 md:ml-32"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {Object.entries(skills).map(([category, items], index) => (
-            <motion.div 
-              key={category} 
-              className="space-y-2 "
-              variants={itemVariants}
-              custom={index}
-            >
-              <h3 className="text-white font-['Fira_Code'] capitalize text-sm sm:text-base mb-2">
-                {category}
-              </h3>
-              <div className="border border-[#ABB2BF] p-2 sm:p-3 rounded-xl  bg-black/80">
-                <p className="space-y-1 sm:space-y-2 text-[#ABB2BF] text-xs sm:text-sm font-['Fira_Code']">
-                  {Array.isArray(items) && items.map((item, index) => (
-                    <React.Fragment key={index}>
-                      <strong>{item}</strong>
-                      {index < items.length - 1 && ', '}
-                    </React.Fragment>
-                  ))}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Decorative Shapes */}
-        <div className="hidden absolute right-24 sm:right-72 top-12 sm:top-24 opacity-50 sm:opacity-100 lg:block">
-          {/* Dots Grid */}
-          <div className="grid grid-cols-4 sm:grid-cols-6 gap-[4px] sm:gap-[6px]">
-            {[...Array(24)].map((_, i) => (
-              <div key={i} className="w-[2px] h-[2px] sm:w-[3px] sm:h-[3px] bg-zinc-400 rounded-full" />
-            ))}
-          </div>
-          
-          {/* Square Shapes */}
-          <div className="relative mt-8 sm:mt-12 hidden sm:block opacity-10">
-            <div className="absolute top-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border border-[#C778DD] opacity-50" />
-            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 w-8 h-8 sm:w-12 sm:h-12 border border-[#C778DD] opacity-50" />
-            <div className="absolute top-6 left-6 sm:top-8 sm:left-8 w-8 h-8 sm:w-12 sm:h-12 border border-[#C778DD] opacity-50" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
 
+// A new component for individual skill tags for cleaner code
+const SkillTag = ({ name, icon }) => {
+  return (
+    <div className="flex items-center justify-center h-20   bg-[#000] text-gray-200 rounded-lg px-5 py-3 shadow-md">
+      {icon && <span className="mr-2">{icon}</span>}
+      <span className="font-semibold tracking-wide text-xl uppercase">{name}</span>
+    </div>
+  );
+};

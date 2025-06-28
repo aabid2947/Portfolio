@@ -2,50 +2,52 @@
 import { useEffect, useState } from "react";
 import { getMainProjects } from "../../API/api";
 import { motion } from "framer-motion";
-import {ProjectCard} from "../projectCard"
-
+import { ProjectCard } from "../projectCard"
+import { useMainProjects } from "../../contexts/ProjectContext";
 
 export default function MainProjets() {
-    const [mainProjets, setMainProjects] = useState([]);
-    const [loading, setLoading] = useState(true)
+    // const [mainProjets, setMainProjects] = useState(mainProjects);
+    const [loading, setLoading] = useState(false)
+    const mainProjects = useMainProjects()
 
-    useEffect(() => {
-        console.log("Fetching main projects");
-        const fetchMainProjects = async () => {
-            try {
-                const mainProjets = await getMainProjects();
-                if (mainProjets) {
-                    setLoading(false)
-                    setMainProjects(mainProjets);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchMainProjects();
-    }, []);
+
+    // useEffect(() => {
+    //     console.log("Fetching main projects");
+    //     const fetchMainProjects = async () => {
+    //         try {
+    //             const mainProjets = await getMainProjects();
+    //             if (mainProjets) {
+    //                 setLoading(false)
+    //                 setMainProjects(mainProjets);
+    //             }
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+    //     fetchMainProjects();
+    // }, []);
 
     if (loading) {
         return <div className="flex items-center justify-center h-screen ">
-        <div className="flex space-x-2">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-300"
-              animate={{
-                opacity: [0.3, 1, 0.3],
-                y: [-5, 5, -5],
-              }}
-              transition={{
-                duration: 1.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
+            <div className="flex space-x-2">
+                {[...Array(5)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-300"
+                        animate={{
+                            opacity: [0.3, 1, 0.3],
+                            y: [-5, 5, -5],
+                        }}
+                        transition={{
+                            duration: 1.2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: i * 0.2,
+                        }}
+                    />
+                ))}
+            </div>
         </div>
-      </div>
     }
 
 
@@ -55,7 +57,7 @@ export default function MainProjets() {
                 <div className="mx-auto max-w-7xl">
                     <h1 className="mb-8 font-mono text-3xl font-bold text-purple-500">#complete-apps</h1>
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
-                        {mainProjets.map((project) => (
+                        {mainProjects.map((project) => (
                             <motion.div
                                 key={project.Name}
                                 whileHover={{ x: 8, y: -8, boxShadow: "0px 10px 30px rgb(0, 2, 48)" }}

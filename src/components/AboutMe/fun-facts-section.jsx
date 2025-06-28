@@ -8,21 +8,21 @@ export default function FunFactsSection() {
   const [funFacts, setFunFacts] = useState({})
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    async function fetchFunFacts() {
-      try {
-        const facts = await getAboutMe();
-        setFunFacts(facts[0].FunFacts)
-        setLoading(false)
-      } catch (error) {
-        console.error("Error fetching fun facts:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchFunFacts() {
+  //     try {
+  //       const facts = await getAboutMe();
+  //       setFunFacts(facts[0].FunFacts)
+  //       setLoading(false)
+  //     } catch (error) {
+  //       console.error("Error fetching fun facts:", error)
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
 
-    fetchFunFacts()
-  }, [])
+  //   fetchFunFacts()
+  // }, [])
 
   if (loading) {
     return <div className="flex items-center justify-center h-screen ">

@@ -3,8 +3,6 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { getAboutMe } from "../../API/api";
 
 const EducationTimeline = () => {
-  const [educationInfo, setEducationInfo] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -17,46 +15,27 @@ const EducationTimeline = () => {
     restDelta: 0.001,
   });
 
-  useEffect(() => {
-    const fetchEducationInfo = async () => {
-      try {
-        const fetchedAboutme = await getAboutMe();
-        if (fetchedAboutme) {
-          setEducationInfo(fetchedAboutme[0].education);
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchEducationInfo();
-  }, []);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="flex space-x-2">
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="w-2 h-2 bg-white rounded-full"
-              animate={{
-                opacity: [0.3, 1, 0.3],
-                y: [-5, 5, -5],
-              }}
-              transition={{
-                duration: 1.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
+  const [educationInfo, setEducationInfo] = useState([
+    {
+      year: "2019",
+      duration: "2018 – 2019",
+      name: "Class 10 – CBSE Board",
+      desc: "Completed secondary education with 91% from CBSE Board.",
+    },
+    {
+      year: "2021",
+      duration: "2019 – 2021",
+      name: "Class 12 – Jamia Millia Islamia",
+      desc: "Scored 84% in Physics, Chemistry, and Mathematics (above 90 in each).",
+    },
+    {
+      year: "2025 (Expected)",
+      duration: "2021 – Present",
+      name: "B.Tech – Jamia Millia Islamia",
+      desc: "Currently in final year, maintaining an average CGPA of 7.4 throughout.",
+    },
+  ]);
   return (
     <section ref={ref} className="py-8 sm:py-12 md:py-16 text-white">
       <div className="container mx-auto px-4">
