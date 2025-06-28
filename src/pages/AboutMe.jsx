@@ -10,6 +10,8 @@ import EducationTimeline from "../components/AboutMe/education-section";
 import { GridBackground } from '../components/ui/GridBackgroud.jsx'; // Import the new component
 
 export default function ContactPage() {
+  
+   
   return (
     <GridBackground>
     

@@ -1,6 +1,7 @@
 import React from "react";
 import HomePage from "./pages/HomePage";
 import { ProjectProvider } from './contexts/ProjectContext';
+import MouseGlow from "./components/ui/MouseGlow";
 function App() {
   return (
     <ProjectProvider>

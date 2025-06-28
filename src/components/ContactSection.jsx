@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaInstagram, FaLinkedin, FaGithub, FaEnvelope, FaTwitter, FaPaperPlane } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaGithub, FaEnvelope, FaTwitter, FaPaperPlane, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 
-export default function ContactSection() {
-  const [activeTab, setActiveTab] = useState('contact');
+const ContactSection = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -12,7 +11,6 @@ export default function ContactSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
       setName('');
@@ -22,275 +20,275 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="min-h-screen px-4 py-24 ">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-12">
-          {/* Left Panel - Information */}
-          <div className="w-full md:w-1/3">
-            <motion.div 
-              className="bg-slate-800/40 backdrop-blur-lg rounded-2xl p-8 border border-slate-700 shadow-xl"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+    <div className="min-h-screen ">
+      {/* Background elements */}
+      {/* <div className="fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        <div className="absolute left-1/2 -translate-x-1/2 top-[-10%] h-[1000px] w-[1000px] rounded-full bg-[radial-gradient(circle_400px_at_50%_300px,#3a3a3a22,#00000000)]"></div>
+        <div className="absolute left-[20%] top-[20%] h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle_300px_at_30%_40%,#2a2a2a15,#00000000)] animate-pulse-slow"></div>
+        <div className="absolute right-[15%] bottom-[15%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle_250px_at_70%_60%,#2a2a2a10,#00000000)] animate-pulse-slower"></div>
+      </div> */}
+
+      <div className="container mx-auto px-4 py-24 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-6xl mx-auto"
+        >
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-block mb-6"
             >
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <h1 className="font-mono text-3xl text-white">
-                    <span className="text-purple-500">/</span>contacts
-                  </h1>
-                  <div className="h-1 w-20 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></div>
-                </div>
+              <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-full px-6 py-2 inline-flex items-center">
+                <FaEnvelope className="text-yellow-500/80 mr-2" />
+                <span className="text-yellow-500/80 font-medium">Get in Touch</span>
+              </div>
+            </motion.div>
+            <motion.h1
+              className="text-4xl md:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-500/90 to-yellow-600">
+                Contact Me
+              </span>
+            </motion.h1>
+            <motion.p
+              className="text-lg text-gray-400 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
+              Have a project in mind or just want to say hello? I'd love to hear from you!
+            </motion.p>
+          </div>
 
-                <h2 className="font-mono text-xl text-zinc-300">
-                  Let's connect
-                </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Column - Contact Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div className="bg-gray-900/70 backdrop-blur-lg border border-gray-800 rounded-2xl p-8 h-full">
+                <h2 className="text-2xl font-bold mb-8 text-yellow-500/90">Contact Information</h2>
 
-                <p className="font-mono text-zinc-400">
-                  I'm interested in freelance opportunities. However, if you have other requests or questions, don't hesitate to contact me.
-                </p>
-
-                <div className="mt-8 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-slate-800/50 rounded-lg">
-                      <FaEnvelope className="h-6 w-6 text-purple-500" />
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="bg-yellow-500/10 p-3 rounded-lg mr-4">
+                      <FaEnvelope className="text-yellow-500/80 text-xl" />
                     </div>
                     <div>
-                      <p className="font-mono text-sm text-zinc-400">Email</p>
-                      <a href="mailto:aabidhussainpas@gmail.com" className="font-mono text-white hover:text-purple-500 transition-colors">
+                      <h3 className="text-lg font-medium text-gray-300 mb-1">Email</h3>
+                      <a href="mailto:aabidhussainpas@gmail.com" className="text-gray-400 hover:text-yellow-500/80 transition-colors">
                         aabidhussainpas@gmail.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-slate-800/50 rounded-lg">
-                      <FaGithub className="h-6 w-6 text-purple-500" />
+                  <div className="flex items-start">
+                    <div className="bg-yellow-500/10 p-3 rounded-lg mr-4">
+                      <FaPhone className="text-yellow-500/80 text-xl" />
                     </div>
                     <div>
-                      <p className="font-mono text-sm text-zinc-400">GitHub</p>
-                      <a href="https://github.com/aabid2947" target="_blank" rel="noopener noreferrer" className="font-mono text-white hover:text-purple-500 transition-colors">
-                        @aabid2947
-                      </a>
+                      <h3 className="text-lg font-medium text-gray-300 mb-1">Phone</h3>
+                      <p className="text-gray-400">+91 1234567890</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-slate-800/50 rounded-lg">
-                      <FaLinkedin className="h-6 w-6 text-purple-500" />
+                  <div className="flex items-start">
+                    <div className="bg-yellow-500/10 p-3 rounded-lg mr-4">
+                      <FaMapMarkerAlt className="text-yellow-500/80 text-xl" />
                     </div>
                     <div>
-                      <p className="font-mono text-sm text-zinc-400">LinkedIn</p>
-                      <a href="https://www.linkedin.com/in/md-aabid-hussain-852a72255/" target="_blank" rel="noopener noreferrer" className="font-mono text-white hover:text-purple-500 transition-colors">
-                        Md Aabid Hussain
-                      </a>
+                      <h3 className="text-lg font-medium text-gray-300 mb-1">Location</h3>
+                      <p className="text-gray-400">Hyderabad, India</p>
                     </div>
+                  </div>
+                </div>
+
+                <div className="mt-10">
+                  <h3 className="text-xl font-bold mb-6 text-yellow-500/90">Follow Me</h3>
+                  <div className="flex space-x-3">
+                    {[
+                      { icon: <FaGithub />, color: "hover:text-yellow-500/80", href: "https://github.com/aabid2947" },
+                      { icon: <FaLinkedin />, color: "hover:text-yellow-500/80", href: "https://www.linkedin.com/in/md-aabid-hussain-852a72255/" },
+                      { icon: <FaInstagram />, color: "hover:text-yellow-500/80", href: "https://instagram.com/aabid2947" },
+                      { icon: <FaTwitter />, color: "hover:text-yellow-500/80", href: "https://x.com/aabid2947" },
+                    ].map((social, index) => (
+                      <motion.a
+                        key={index}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-gray-800 p-3 rounded-full text-gray-400 text-lg transition-all hover:bg-yellow-500/10"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {social.icon}
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-10">
+                  <h3 className="text-lg font-bold mb-4 text-yellow-500/90">Availability</h3>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 rounded-full bg-green-500 mr-2 animate-pulse"></div>
+                    <p className="text-gray-400">Available for freelance work</p>
                   </div>
                 </div>
               </div>
             </motion.div>
-          </div>
 
-          {/* Right Panel - Contact Form & Social Media */}
-          <div className="w-full md:w-2/3">
-            <div className="bg-slate-800/40 backdrop-blur-lg rounded-2xl p-8 border border-slate-700 shadow-xl h-full">
-              <div className="flex gap-4 mb-8">
-                <button 
-                  className={`px-6 py-3 rounded-full font-mono transition-all ${
-                    activeTab === 'contact' 
-                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white' 
-                      : 'bg-slate-800/50 text-zinc-400 hover:bg-slate-700/50'
-                  }`}
-                  onClick={() => setActiveTab('contact')}
+            {/* Right Column - Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              <div className="bg-gray-900/70 backdrop-blur-lg border border-gray-800 rounded-2xl p-8 h-full">
+                <h2
+                  className="text-2xl font-bold mb-8 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text"
                 >
-                  Send Message
-                </button>
-                <button 
-                  className={`px-6 py-3 rounded-full font-mono transition-all ${
-                    activeTab === 'social' 
-                      ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white' 
-                      : 'bg-slate-800/50 text-zinc-400 hover:bg-slate-700/50'
-                  }`}
-                  onClick={() => setActiveTab('social')}
-                >
-                  Social Media
-                </button>
-              </div>
+                  Send a Message
+                </h2>
 
-              {activeTab === 'contact' ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {isSubmitted ? (
-                    <div className="flex flex-col items-center justify-center py-12">
-                      <div className="bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full p-4 mb-6">
-                        <FaPaperPlane className="h-12 w-12 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-mono text-white mb-2">Message Sent!</h3>
-                      <p className="text-zinc-400 font-mono text-center">
-                        Thanks for reaching out. I'll get back to you soon.
-                      </p>
+                {isSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center py-12"
+                  >
+                    <div className="bg-gradient-to-r from-yellow-500/80 to-yellow-600/80 rounded-full p-5 mb-6">
+                      <FaPaperPlane className="h-10 w-10 text-white" />
                     </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="space-y-2">
-                        <label className="font-mono text-zinc-300 block">Name</label>
+                    <h3 className="text-xl font-bold mb-2 text-yellow-500/90">Message Sent!</h3>
+                    <p className="text-gray-400 text-center max-w-md">
+                      Thanks for reaching out. I'll get back to you as soon as possible.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <label className="block text-gray-400 mb-2">Your Name</label>
+                      <div className="relative">
                         <input
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white font-mono focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
-                          placeholder="Your name"
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50 transition-all pl-12"
+                          placeholder="John Doe"
                           required
                         />
+                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-500/80">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                          </svg>
+                        </div>
                       </div>
+                    </div>
 
-                      <div className="space-y-2">
-                        <label className="font-mono text-zinc-300 block">Email</label>
+                    <div>
+                      <label className="block text-gray-400 mb-2">Your Email</label>
+                      <div className="relative">
                         <input
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white font-mono focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
-                          placeholder="your.email@example.com"
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50 transition-all pl-12"
+                          placeholder="john@example.com"
                           required
                         />
+                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-500/80">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                          </svg>
+                        </div>
                       </div>
+                    </div>
 
-                      <div className="space-y-2">
-                        <label className="font-mono text-zinc-300 block">Message</label>
+                    <div>
+                      <label className="block text-gray-400 mb-2">Your Message</label>
+                      <div className="relative">
                         <textarea
                           value={message}
                           onChange={(e) => setMessage(e.target.value)}
                           rows={5}
-                          className="w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 text-white font-mono focus:outline-none focus:ring-2 focus:ring-purple-600 transition-all"
-                          placeholder="Your message here..."
+                          className="w-full bg-gray-800/50 border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:ring-1 focus:ring-yellow-500/50 transition-all pl-12"
+                          placeholder="Hello, I'd like to talk about..."
                           required
                         ></textarea>
+                        <div className="absolute left-4 top-4 text-yellow-500/80">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clipRule="evenodd" />
+                          </svg>
+                        </div>
                       </div>
+                    </div>
 
-                      <button
-                        type="submit"
-                        className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-mono rounded-xl hover:opacity-90 transition-opacity flex items-center justify-center gap-3"
-                      >
-                        <FaPaperPlane className="h-5 w-5" />
-                        Send Message
-                      </button>
-                    </form>
-                  )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-8"
-                >
-                  <div>
-                    <h3 className="font-mono text-xl text-white mb-6">
-                      <span className="text-purple-500">#</span>all-media
-                    </h3>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <a
-                        href="https://instagram.com/aabid2947"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700 hover:border-purple-500 transition-all group"
-                      >
-                        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-3 rounded-lg group-hover:scale-110 transition-transform">
-                          <FaInstagram className="h-6 w-6 text-white" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-white">Instagram</p>
-                          <p className="font-mono text-sm text-zinc-400">@aabid2947</p>
-                        </div>
-                      </a>
-                      
-                      <a
-                        href="https://x.com/aabid2947"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700 hover:border-blue-400 transition-all group"
-                      >
-                        <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-lg group-hover:scale-110 transition-transform">
-                          <FaTwitter className="h-6 w-6 text-white" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-white">Twitter</p>
-                          <p className="font-mono text-sm text-zinc-400">@aabid2947</p>
-                        </div>
-                      </a>
-                      
-                      <a
-                        href="https://www.linkedin.com/in/md-aabid-hussain-852a72255/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700 hover:border-blue-500 transition-all group"
-                      >
-                        <div className="bg-gradient-to-r from-blue-700 to-blue-500 p-3 rounded-lg group-hover:scale-110 transition-transform">
-                          <FaLinkedin className="h-6 w-6 text-white" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-white">LinkedIn</p>
-                          <p className="font-mono text-sm text-zinc-400">Md Aabid Hussain</p>
-                        </div>
-                      </a>
-                      
-                      <a
-                        href="https://github.com/aabid2947"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700 hover:border-gray-500 transition-all group"
-                      >
-                        <div className="bg-gradient-to-r from-gray-800 to-gray-600 p-3 rounded-lg group-hover:scale-110 transition-transform">
-                          <FaGithub className="h-6 w-6 text-white" />
-                        </div>
-                        <div>
-                          <p className="font-mono text-white">GitHub</p>
-                          <p className="font-mono text-sm text-zinc-400">@aabid2947</p>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-8">
-                    <h3 className="font-mono text-xl text-white mb-6">
-                      <span className="text-purple-500">#</span>direct-links
-                    </h3>
-                    
-                    <div className="flex flex-wrap gap-4">
-                      <a 
-                        href="mailto:aabidhussainpas@gmail.com" 
-                        className="px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg font-mono text-zinc-300 hover:bg-purple-600/20 hover:border-purple-500 transition-colors"
-                      >
-                        Email me
-                      </a>
-                      <a 
-                        href="https://github.com/aabid2947" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg font-mono text-zinc-300 hover:bg-gray-700/20 hover:border-gray-500 transition-colors"
-                      >
-                        View GitHub
-                      </a>
-                      <a 
-                        href="https://www.linkedin.com/in/md-aabid-hussain-852a72255/" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg font-mono text-zinc-300 hover:bg-blue-700/20 hover:border-blue-500 transition-colors"
-                      >
-                        Connect on LinkedIn
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </div>
+                    <motion.button
+                      type="submit"
+                      className="w-full py-3 bg-gradient-to-r from-yellow-500/80 to-yellow-600/80 text-white font-medium rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-3 mt-6"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <FaPaperPlane className="h-5 w-5" />
+                      Send Message
+                    </motion.button>
+                  </form>
+                )}
+              </div>
+            </motion.div>
           </div>
-        </div>
+
+          {/* Location Map */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-16 bg-gray-900/70 backdrop-blur-lg border border-gray-800 rounded-2xl p-8"
+          >
+            <h2 className="text-2xl font-bold mb-6 text-yellow-500/90">My Location</h2>
+            <div className="bg-gray-800 h-60 rounded-xl overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-black/80 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-full p-4 inline-block mb-4">
+                    <FaMapMarkerAlt className="text-yellow-500/80 text-2xl" />
+                  </div>
+                  <p className="text-lg font-medium text-white">Hyderabad, India</p>
+                  <p className="text-gray-400 mt-2">Available for remote work worldwide</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
+
+      <style jsx global>{`
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.6; }
+        }
+        @keyframes pulse-slower {
+          0%, 100% { opacity: 0.2; }
+          50% { opacity: 0.4; }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 6s infinite;
+        }
+        .animate-pulse-slower {
+          animation: pulse-slower 8s infinite;
+        }
+      `}</style>
     </div>
   );
-}
+};
+
+export default ContactSection;

@@ -19,9 +19,9 @@ export default function ContactSection() {
   }, []);
 
   return (
-    <section className="text-white">
+    <section className="text-white mb-6">
       <div className="container mx-auto px-8 text-center space-y-8">
-        <h2 className="font-mono text-yellow-300 text-10xl lg:text-3xl">
+        <h2 className="font-mono text-yellow-300 text-sm lg:text-6xl">
           Lets Work Together!
         </h2>
         <p className="text-gray-300 text-lg sm:text-xl leading-relaxed max-w-xl mx-auto">

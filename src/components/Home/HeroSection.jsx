@@ -1,136 +1,139 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import TypewriterComponent from "typewriter-effect";
-import HeroImage from "../../assets/HeroSectionImage.png";
-import { getAboutMe } from "../../API/api";
-import {
-  Modal,
-  ModalTrigger,
-} from "../ui/animated-modal";
+"use client";
 
-export function HeroSection() {
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const [resumeLink,setResumeLink] = useState("https://drive.google.com/file/d/1-2TvtoLje_3Cz4cVracgFNJwJB8ATjKt/view?usp=drive_link")
+import { useEffect, useState } from "react";
+import HeroImage from "../../assets/HeroSectionImage.png"; // Replace with your actual image
 
-  // useEffect(()=>{
-  //   const fetchResume= async ( ) =>{
-  //     const aboutMe = await getAboutMe()
-  //     if (aboutMe){
-  //       console.log(aboutMe)
-  //       setResumeLink(aboutMe[0].Resume)
-  //     }
-  //   }
-  //   fetchResume()
-  // },[])
+export  function HeroSection() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // useEffect(() => {
+  //   const handleMouseMove = (e) => {
+  //     setMousePosition({ x: e.clientX, y: e.clientY });
+  //   };
+
+  //   window.addEventListener("mousemove", handleMouseMove);
+  //   return () => window.removeEventListener("mousemove", handleMouseMove);
+  // }, []);
 
   return (
-    <div className="relative  px-8 py-16 ">
+    <div className="relative px-8 py-24 overflow-hidden">
+      {/* Mouse-following glow */}
+      
+
+      {/* Animated background glows */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute left-1/4 top-1/4 h-64 w-64 bg-yellow-600/10 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute right-1/4 bottom-1/4 h-80 w-80 bg-orange-600/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+      </div>
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 -z-10">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-1 w-1 bg-yellow-400/30 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`,
+            }}
+          ></div>
+        ))}
+      </div>
+
       <div className="mx-auto max-w-7xl">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          {/* Intro */}
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          {/* Text */}
           <div className="space-y-8">
-            <h1 className="font-mono text-4xl text-white">
-              <TypewriterComponent
-                onInit={(typewriter) => {
-                  typewriter
-                    .typeString("Aabid is a ")
-                    .typeString(
-                      '<span class="text-purple-500">web designer</span>'
-                    )
-                    .typeString(" and ")
-                    .typeString(
-                      '<span class="text-purple-500">Full Stack developer</span>'
-                    )
-                    .callFunction(() => setIsTypingComplete(true))
-                    .start();
-                }}
-                options={{
-                  autoStart: true,
-                  delay: 50,
-                  cursor: "|",
-                }}
-              />
-            </h1>
-            <p className="font-mono text-lg text-zinc-400">
-              {isTypingComplete && (
-                <TypewriterComponent
-                  onInit={(typewriter) => {
-                    typewriter
-                      .typeString(
-                        "He crafts responsive websites where technologies meet creativity"
-                      )
-                      .start();
-                  }}
-                  options={{
-                    autoStart: true,
-                    delay: 30,
-                    cursor: "",
-                  }}
-                />
-              )}
-            </p>
-
-           
-
-            <motion.button
-              className="relative overflow-hidden border border-white px-6 py-2 font-mono text-white transition-colors rounded-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-               <Modal>
-               <ModalTrigger className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
-                <span className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
-                  See My Resume
+            <div className="space-y-4">
+              <div className="inline-block">
+                <span className="text-sm font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
+                  Full-Stack Developer
                 </span>
-                <a href={resumeLink} target="_blank" download rel="noopener noreferrer">
-                  <div className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
-                    Download
-                  </div>
-                </a>
-              </ModalTrigger>
-            
-            </Modal>
-              <motion.div
-                className="absolute inset-0 bg-purple-500"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
-                transition={{ duration: 0.5 }}
-              />
-            </motion.button>
+              </div>
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
+                Hello, I'm{" "}
+                <span className="relative">
+                  <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient-x">
+                    Aabid
+                  </span>
+                  <span className="absolute -bottom-2 left-0 h-1 w-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transform scale-x-0 animate-scale-x"></span>
+                </span>
+                .
+              </h1>
+            </div>
+
+            <div className="space-y-6">
+              <p className="text-lg leading-relaxed text-zinc-300 animate-fade-in-up delay-300">
+                I'm a passionate freelancer and B.Tech student based in{" "}
+                <span className="text-yellow-400 font-medium">India</span>. I specialize in creating powerful and user-friendly web and mobile applications tailored to solve real-world problems.
+              </p>
+
+              <p className="text-base leading-relaxed text-zinc-400 animate-fade-in-up delay-500">
+                With a strong foundation in full-stack development, I've built production-ready SaaS tools, mobile apps, and data-driven solutions. I continuously learn and experiment with new technologies to deliver top-notch user experiences and scalable systems.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8 animate-fade-in-up delay-700">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-400">2+</div>
+                <div className="text-sm text-zinc-500">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-orange-400">60+</div>
+                <div className="text-sm text-zinc-500">Projects Completed</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-red-400">100%</div>
+                <div className="text-sm text-zinc-500">Client Satisfaction</div>
+              </div>
+            </div>
           </div>
 
-          {/* Image and decorations */}
-          <div className="relative">
-            <div className="absolute right-0 top-0 -z-10 h-72 w-72 bg-purple-500/10 blur-3xl"></div>
-            <div className="relative aspect-square">
-              {/* Geometric squares */}
+          {/* Image and Effects */}
+          <div className="relative group animate-fade-in-up delay-200">
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute inset-0 rounded-full border-2 border-yellow-400/20 animate-spin-slow"></div>
+              <div className="absolute inset-4 rounded-full border border-orange-400/20 animate-spin-slow-reverse"></div>
+            </div>
 
-              {/* Dot pattern */}
-              <div className="absolute -right-4 top-4 grid h-24 w-24 grid-cols-4 gap-2">
-                {[...Array(16)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-1.5 w-1.5 rounded-full bg-zinc-700"
-                  ></div>
-                ))}
-              </div>
+            <div className="absolute -right-4 -top-4 grid h-24 w-24 grid-cols-4 gap-2 transition-all duration-500 group-hover:-translate-x-3 group-hover:-translate-y-3 group-hover:rotate-12">
+              {[...Array(16)].map((_, i) => (
+                <div
+                  key={i}
+                  className="h-2 w-2 rounded-full bg-zinc-700 transition-all duration-500 group-hover:bg-yellow-400 group-hover:shadow-lg group-hover:shadow-yellow-400/50"
+                  style={{ animationDelay: `${i * 50}ms` }}
+                ></div>
+              ))}
+            </div>
+
+            <div className="absolute -bottom-4 -left-4 grid h-24 w-24 grid-cols-4 gap-2 transition-all duration-500 group-hover:translate-x-3 group-hover:translate-y-3 group-hover:-rotate-12">
+              {[...Array(16)].map((_, i) => (
+                <div
+                  key={i}
+                  className="h-2 w-2 rounded-full bg-zinc-700 transition-all duration-500 group-hover:bg-orange-400 group-hover:shadow-lg group-hover:shadow-orange-400/50"
+                  style={{ animationDelay: `${i * 50}ms` }}
+                ></div>
+              ))}
+            </div>
+
+            <div className="relative aspect-square overflow-hidden rounded-2xl shadow-2xl shadow-yellow-900/30 group-hover:shadow-yellow-500/20 transition-all duration-500">
+              <div className="absolute inset-0 z-10"></div>
               <img
                 src={HeroImage}
-                alt="Developer portrait"
-                className="relative z-0 h-full w-full object-cover"
-                width={500}
-                height={500}
+                alt="Aabid's portrait"
+                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
               />
-              {/* Status bar */}
-              <div className="absolute bottom-8 left-0 right-0 z-10 mx-4">
-                <div className="flex items-center gap-2 rounded bg-zinc-900/80 p-4 backdrop-blur">
-                  <div className="h-3 w-3 rounded-sm bg-purple-500"></div>
-                  <p className="font-mono text-sm text-zinc-400">
-                    Currently working on{" "}
-                    <span className="text-white">Portfolio</span>
-                  </p>
-                </div>
-              </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+
+            <div className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg animate-bounce-slow">
+              <span className="text-white font-bold text-sm">JS</span>
+            </div>
+            <div className="absolute -bottom-8 -left-8 w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center shadow-lg animate-bounce-slow delay-1000">
+              <span className="text-white font-bold text-xs">TS</span>
             </div>
           </div>
         </div>
@@ -138,27 +141,3 @@ export function HeroSection() {
     </div>
   );
 }
-
-const VacationIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M17.553 16.75a7.5 7.5 0 0 0 -10.606 0" />
-      <path d="M18 3.804a6 6 0 0 0 -8.196 2.196l10.392 6a6 6 0 0 0 -2.196 -8.196z" />
-      <path d="M16.732 10c1.658 -2.87 2.225 -5.644 1.268 -6.196c-.957 -.552 -3.075 1.326 -4.732 4.196" />
-      <path d="M15 9l-3 5.196" />
-      <path d="M3 19.25a2.4 2.4 0 0 1 1 -.25a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 1 .25" />
-    </svg>
-  );
-};

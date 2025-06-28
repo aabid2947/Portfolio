@@ -29,7 +29,6 @@ const skillsData = [
   },
 ];
 
-// Card component with the flip animation
 const SkillCard = ({ skill }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -44,11 +43,11 @@ const SkillCard = ({ skill }) => {
 
   return (
     <div
-      className="w-full h-80 rounded-2xl [perspective:1000px]"
+      className="w-full h-[30rem] rounded-2xl [perspective:1000px]"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
-                 <div className="absolute inset-0 bg-[radial-gradient(circle_farthest-side_at_var(--mouse-x)_var(--mouse-y),_rgba(199,120,221,0.15),_transparent_80%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_farthest-side_at_var(--mouse-x)_var(--mouse-y),_rgba(199,120,221,0.15),_transparent_80%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
 
       <motion.div
         className="relative w-full h-full [transform-style:preserve-3d]"
@@ -57,11 +56,22 @@ const SkillCard = ({ skill }) => {
         transition={{ duration: 0.6, ease: 'easeInOut' }}
       >
         {/* Front of the card */}
-        <div className="absolute w-full h-full flex flex-col items-center justify-center bg-[#000] rounded-2xl p-6 [backface-visibility:hidden]">
-           {/* <div className="w-4 h-4 rounded-full bg-white/10 mb-6 shadow-inner"></div> */}
-           <h3 className="text-2xl text-center font-semibold text-gray-200">
-             {skill.title}
-           </h3>
+        <div className="absolute w-full h-full flex flex-col items-center justify-center bg-zinc-950 backdrop-blur-lg border border-gray-800 rounded-2xl p-6 [backface-visibility:hidden]">
+               <div className="absolute top-0 left-0 w-2/3 h-2/3 bg-white/10 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+          {/* Lighting effect - bottom right (yellow) */}
+        
+   
+            <div className="absolute top-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
+
+          {/* Bottom yellow glow */}
+
+            <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-yellow-100/10 to-transparent blur-2xl"></div>
+          
+          <h3 className="text-2xl text-center font-semibold text-gray-200">
+
+            {skill.title}
+          </h3>
         </div>
 
         {/* Back of the card */}
@@ -76,13 +86,14 @@ const SkillCard = ({ skill }) => {
 };
 
 
+
 // Main Skills Section Component
 export default function SkillsSection() {
   return (
     <section className=" text-gray-300 p-8 sm:p-16">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-4 mb-12">
-           <h2 className="font-mono text-[#C778DD] text-3xl">#skills</h2>
+           <h2 className="text-yellow-300 font-xl text-3xl">Skills</h2>
            <div className="h-[1px] flex-grow bg-gray-700" />
         </div>
         

@@ -10,6 +10,7 @@ import { QuoteSection } from '../components/Home/QuoteSection';
 import Hyperspeed from '../components/ui/Hyperspeed';
 import ProjectSectionHome from '../components/Home/ProjectSectionHome.jsx';
 import { GridBackground } from '../components/ui/GridBackgroud.jsx'; // Import the new component
+import MouseGlow from '../components/ui/MouseGlow.jsx';
 
 const AnimatedSection = ({ children, direction }) => {
   const ref = React.useRef(null);
@@ -44,11 +45,13 @@ const AnimatedSection = ({ children, direction }) => {
   );
 };
 
+
 export default function HomePage() {
   return (
     <GridBackground>
+      
       {/* <div className="relative "> */}
-        <div >
+        <div className='max-w-7xl mx-auto flex flex-col justify-center ' >
         <NavBar />
           <AnimatedSection direction="up">
             <HeroSection />
@@ -66,8 +69,8 @@ export default function HomePage() {
           <AnimatedSection direction="left">
             <ContactSection />
           </AnimatedSection>
-          <Footer />
         </div>
+          <Footer />
       {/* </div> */}
     </GridBackground>
   );

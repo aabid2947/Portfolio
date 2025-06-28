@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-
+import pvPingMc from '../assets/pvPingMc.png'
 // Define the shape of a project
 
 // The fixed list of main projects
@@ -20,6 +20,7 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/PvPingMc'],
     Live: 'https://pvpingmcv02.pages.dev/',
+    pic:pvPingMc
   },
   {
     Name: 'Modernaff',
@@ -37,6 +38,8 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/Modernaff'],
     Live: 'https://modernaff.com/',
+    pic:pvPingMc
+
   },
     {
     Name: 'Yacht Inventory',
@@ -55,9 +58,12 @@ const mainProjects=[
       'Emotion',
       'WordPress',
       'ESLint',
+      
     ],
     Repo: ['https://github.com/aabid2947/yacht-inventory'],
     Live: 'https://yacht-inventory.vercel.app',
+    pic:pvPingMc
+
   },
    {
     Name: 'Aiva',
@@ -77,6 +83,8 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/Aiva','https://github.com/aabid2947/AivaBackend'],
     Live: 'https://drive.google.com/file/d/1tzKBnf0olvCSIta0giXWxSBcRLbKCkhr/view?usp=drive_link',
+    pic:pvPingMc
+
   },
    {
     Name: 'Transfer Learning',
@@ -92,6 +100,8 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/TransferLearn'],
     Live: '',
+    pic:pvPingMc
+
   },
 ];
 

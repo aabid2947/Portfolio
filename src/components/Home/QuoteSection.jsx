@@ -7,8 +7,8 @@ export function QuoteSection() {
           <div className="flex flex-col items-end gap-">
             <div className="relative w-full max-w-lg  ">
               {/* Quote marks */}
-              <span className="absolute -left-4 -top-4 font-mono text-2xl text-[#C778DD]">#</span>
-              <span className="absolute -bottom-4 -right-4 font-mono text-2xl text-[#C778DD]">#</span>
+              <span className="absolute -left-4 -top-4 font-mono text-2xl text-yellow-300">#</span>
+              <span className="absolute -bottom-4 -right-4 font-mono text-2xl text-yellow-300">#</span>
               
               {/* Quote content */}
               <div className="border backdrop-blur-md border-[#ABB2BF] p-8">
