@@ -16,7 +16,7 @@ export default function AboutSection() {
   }, [])
 
   return (
-    <div className="relative px-8 mt-100 overflow-hidden">
+    <div className="relative px-8 pt-36 overflow-hidden">
       {/* Dynamic mouse-following glow */}
       <div
         className="absolute -z-10 h-96 w-96 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 blur-3xl transition-all duration-300 ease-out pointer-events-none"

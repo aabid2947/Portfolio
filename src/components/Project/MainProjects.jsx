@@ -36,7 +36,9 @@ export default function MainProjets() {
         <>
             <div className="w-full max-w-7xl mx-auto relative pt-16 sm:pt-20 md:pt-24 px-4 sm:px-8"> {/* Adjusted padding */}
                 <div className="mx-auto max-w-7xl">
-                    <h1 className="mb-6 sm:mb-8 font-mono text-2xl sm:text-3xl font-bold text-yellow-300">Major Projects</h1> {/* Adjusted heading size and margin */}
+                    <h2 className="text-white text-4xl font-semibold leading-[4rem] pb-1 tracking-wider ">My Main <br />
+                        <span className='text-yellow-300'> Highlights!</span> </h2> {/* Adjusted font size */}
+                    {/* Adjusted heading size and margin */}
                     <div className="grid gap-x-2 gap-y-8 sm:grid-cols-1 lg:grid-cols-2"> {/* Added gap-y for vertical spacing between cards on smaller screens */}
                         {mainProjects.map((project) => (
                             <motion.div

@@ -39,7 +39,7 @@ const HighlightTag = ({ children }) => {
 
 export default function AboutSectionHome() {
   return (
-    <div className="relative w-full py-16 sm:py-20 md:py-20 flex">
+    <div className="relative w-full pt-60 sm:py-20 md:py-20 flex">
       {/* Sidebar */}
 
 
