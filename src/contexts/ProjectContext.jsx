@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import pvPingMc from '../assets/PvPingMc.png'
+import PvPingMc from '../assets/PvPingMc.png'
 import Modernaff from '../assets/Modernaff.png'
 import yacht from '../assets/yacht.png'
 import Portfolio from '../assets/Portfolio.png'
@@ -24,7 +24,7 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/PvPingMc'],
     Live: 'https://pvpingmcv02.pages.dev/',
-    pic:pvPingMc
+    pic:PvPingMc
   },
   {
     Name: 'Modernaff',
@@ -84,7 +84,7 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/Aiva','https://github.com/aabid2947/AivaBackend'],
     Live: 'https://drive.google.com/file/d/1tzKBnf0olvCSIta0giXWxSBcRLbKCkhr/view?usp=drive_link',
-    pic:pvPingMc
+    pic:PvPingMc
   },
   {
     Name: 'Transfer Learning',
@@ -100,7 +100,7 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/TransferLearn'],
     Live: '',
-    pic:pvPingMc
+    pic:PvPingMc
   },
   {
     Name: 'Portfolio',
