@@ -97,7 +97,7 @@ export default function Footer() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/20">
                   <MapPin className="h-5 w-5 text-yellow-400" />
                 </div>
-                <span className="font-mono text-lg">Kyiv, Ukraine</span>
+                <span className="font-mono text-lg">Delhi, India</span>
               </div>
             </div>
 
@@ -165,7 +165,7 @@ export default function Footer() {
                 </span>
               </a>
               <span className="h-4 w-px bg-zinc-700"></span>
-              <p className="font-mono text-lg text-zinc-500">Web designer and front-end developer</p>
+              <p className="font-mono text-lg text-zinc-500">Full Stack and Mobile developer</p>
             </div>
 
             <p className="font-mono text-lg text-zinc-500">

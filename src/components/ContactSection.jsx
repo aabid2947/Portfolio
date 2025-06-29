@@ -97,7 +97,7 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-gray-300 mb-1">Phone</h3>
-                      <p className="text-gray-400">+91 1234567890</p>
+                      <p className="text-gray-400">+91 8264782290</p>
                     </div>
                   </div>
 
@@ -107,7 +107,7 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-gray-300 mb-1">Location</h3>
-                      <p className="text-gray-400">Hyderabad, India</p>
+                      <p className="text-gray-400">Delhi, India</p>
                     </div>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ const ContactSection = () => {
             >
               <div className="bg-gray-900/70 backdrop-blur-lg border border-gray-800 rounded-2xl p-8 h-full">
                 <h2
-                  className="text-2xl font-bold mb-8 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text"
+                 className="text-2xl font-bold mb-8 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-transparent bg-clip-text" 
                 >
                   Send a Message
                 </h2>
@@ -262,7 +262,7 @@ const ContactSection = () => {
                   <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-full p-4 inline-block mb-4">
                     <FaMapMarkerAlt className="text-yellow-500/80 text-2xl" />
                   </div>
-                  <p className="text-lg font-medium text-white">Hyderabad, India</p>
+                  <p className="text-lg font-medium text-white">Delhi, India</p>
                   <p className="text-gray-400 mt-2">Available for remote work worldwide</p>
                 </div>
               </div>
