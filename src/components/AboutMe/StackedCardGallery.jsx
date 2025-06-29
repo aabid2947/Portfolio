@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import SIH_1 from "../../assets/SIH_1.jpg";
-import SIH_2 from "../../assets/SIH_2.jpg";
-import SIH_3 from "../../assets/SIH_3.jpg";
-import SIH_4 from "../../assets/SIH_4.jpg";
 
-const illustrations = [SIH_1, SIH_2, SIH_3, SIH_4];
+const illustrations = [
+  "/SIH_1.jpg",
+  "/SIH_2.jpg",
+  "/SIH_3.jpg",
+  "/SIH_4.jpg",
+];
 
 export default function StackedCardGallery() {
     const [active, setActive] = useState(null);
