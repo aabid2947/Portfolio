@@ -8,13 +8,12 @@ import { GridBackground } from '../components/ui/GridBackgroud.jsx'; // Import t
 export default function ProjectPage() {
   return (
     <>
-    
      <GridBackground>
         <NavBar />
         <MainProjects/>
         <SmallProjectsSection />
         <Footer />
-  </GridBackground>
+    </GridBackground>
     </>
   );
 }

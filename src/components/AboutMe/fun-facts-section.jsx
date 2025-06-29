@@ -67,12 +67,12 @@ export default function FunFactsSection() {
 
   return (
     <section className=" text-gray-300 p-8  flex items-center">
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h2 className="text-2xl md:text-3xl font-mono mb-2 text-white">
-            <span className="text-yellow-400">#</span>my-fun-facts
-          </h2>
-          <p className="text-gray-400 mb-12 font-mono text-sm">Things that make me, well... me</p>
+          
+          <h2 className="text-white text-4xl font-semibold leading-[4rem] pb-1 tracking-wider ">Fun Facts<br />
+           <span className='text-yellow-300'> Things that make me, well... me</span> </h2> {/* Adjusted font size */}
+        
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -144,7 +144,7 @@ export default function FunFactsSection() {
           transition={{ delay: 1.5, duration: 0.6 }}
           className="mt-16 text-center"
         >
-          <p className="text-gray-500 font-mono text-xs">Hover over the cards to see them come alive ✨</p>
+          <p className="text-gray-500 font-mono text-lg">Hover over the cards to see them come alive ✨</p>
         </motion.div>
       </div>
     </section>

@@ -43,7 +43,7 @@ const SkillCard = ({ skill }) => {
 
   return (
     <div
-      className="w-full h-[30rem] rounded-2xl [perspective:1000px]"
+      className="w-full h-[24rem] sm:h-[28rem] lg:h-[30rem] rounded-2xl [perspective:1000px]" // Adjusted height for responsiveness
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
@@ -56,27 +56,27 @@ const SkillCard = ({ skill }) => {
         transition={{ duration: 0.6, ease: 'easeInOut' }}
       >
         {/* Front of the card */}
-        <div className="absolute w-full h-full flex flex-col items-center justify-center bg-zinc-950 backdrop-blur-lg border border-gray-800 rounded-2xl p-6 [backface-visibility:hidden]">
-               <div className="absolute top-0 left-0 w-2/3 h-2/3 bg-white/10 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div className="absolute w-full h-full flex flex-col items-center justify-center bg-zinc-950 backdrop-blur-lg border border-gray-800 rounded-2xl p-4 sm:p-6 [backface-visibility:hidden]"> {/* Adjusted padding */}
+          <div className="absolute top-0 left-0 w-2/3 h-2/3 bg-white/10 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
           {/* Lighting effect - bottom right (yellow) */}
-        
-   
-            <div className="absolute top-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
+
+
+          <div className="absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 bg-white/20 rounded-full blur-2xl"></div> {/* Adjusted size */}
 
           {/* Bottom yellow glow */}
 
-            <div className="absolute bottom-0 w-full h-24 bg-gradient-to-t from-yellow-100/10 to-transparent blur-2xl"></div>
-          
-          <h3 className="text-2xl text-center font-semibold text-gray-200">
+          <div className="absolute bottom-0 w-full h-16 sm:h-24 bg-gradient-to-t from-yellow-100/10 to-transparent blur-2xl"></div> {/* Adjusted height */}
+
+          <h3 className="text-xl sm:text-2xl text-center font-semibold text-gray-200"> {/* Adjusted font size */}
 
             {skill.title}
           </h3>
         </div>
 
         {/* Back of the card */}
-        <div className="absolute w-full h-full bg-gradient-to-br from-white to-gray-200 rounded-2xl p-8 flex items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden]">
-          <p className="text-center text-gray-700 font-medium text-xl leading-relaxed">
+        <div className="absolute w-full h-full bg-gradient-to-br from-white to-gray-200 rounded-2xl p-6 sm:p-8 flex items-center justify-center [transform:rotateY(180deg)] [backface-visibility:hidden]"> {/* Adjusted padding */}
+          <p className="text-base sm:text-lg lg:text-xl text-center text-gray-700 font-medium leading-relaxed"> {/* Adjusted font size */}
             {skill.description}
           </p>
         </div>
@@ -90,15 +90,16 @@ const SkillCard = ({ skill }) => {
 // Main Skills Section Component
 export default function SkillsSection() {
   return (
-    <section className=" text-gray-300 p-8 sm:p-16">
+    <section className="text-gray-300 p-4 sm:p-8 lg:p-16"> {/* Adjusted padding for all screen sizes */}
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-           <h2 className="text-yellow-300 font-xl text-3xl">Skills</h2>
-           <div className="h-[1px] flex-grow bg-gray-700" />
-        </div>
+        <div className="flex items-center gap-2 sm:gap-4 mb-8 sm:mb-12"> {/* Adjusted gap and margin-bottom */}
+          <h2 className="text-white text-4xl font-semibold leading-[4rem] pb-1 tracking-wider ">This  is<br />
+           <span className='text-yellow-300'> WHAT I put on the table</span> </h2> {/* Adjusted font size */}
         
+        </div>
+
         {/* Skills Grid */}
-        <div className="mx-20 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="mx-4 sm:mx-8 md:mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10"> {/* Adjusted horizontal margin and gaps */}
           {skillsData.map((skill, index) => (
             <SkillCard key={index} skill={skill} />
           ))}

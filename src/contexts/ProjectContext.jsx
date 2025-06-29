@@ -1,5 +1,9 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import pvPingMc from '../assets/pvPingMc.png'
+import pvPingMc from '../assets/PvPingMc.png'
+import Modernaff from '../assets/Modernaff.png'
+import yacht from '../assets/yacht.png'
+import Portfolio from '../assets/Portfolio.png'
+
 // Define the shape of a project
 
 // The fixed list of main projects
@@ -38,10 +42,9 @@ const mainProjects=[
     ],
     Repo: ['https://github.com/aabid2947/Modernaff'],
     Live: 'https://modernaff.com/',
-    pic:pvPingMc
-
+    pic:Modernaff
   },
-    {
+  {
     Name: 'Yacht Inventory',
     Desc:
       'A yacht inventory platform with filtering, comparison, pagination, contact form, and loan calculator features. Uses WordPress for backend and modern React tools for frontend.',
@@ -58,14 +61,12 @@ const mainProjects=[
       'Emotion',
       'WordPress',
       'ESLint',
-      
     ],
     Repo: ['https://github.com/aabid2947/yacht-inventory'],
     Live: 'https://yacht-inventory.vercel.app',
-    pic:pvPingMc
-
+    pic:yacht
   },
-   {
+  {
     Name: 'Aiva',
     Desc:
       'Aiva is a React Native mobile virtual assistant that supports chat with AI, voice-to-text input, file upload summarization, and M-Pesa payments. It includes Firebase authentication, push notifications, and Google Sign-In.',
@@ -84,9 +85,8 @@ const mainProjects=[
     Repo: ['https://github.com/aabid2947/Aiva','https://github.com/aabid2947/AivaBackend'],
     Live: 'https://drive.google.com/file/d/1tzKBnf0olvCSIta0giXWxSBcRLbKCkhr/view?usp=drive_link',
     pic:pvPingMc
-
   },
-   {
+  {
     Name: 'Transfer Learning',
     Desc:
       'A PyTorch-based implementation of transfer learning that retrains a pre-trained model on custom image datasets. It includes data preprocessing, model training, and evaluation confusion matrices and accuracy curves.',
@@ -101,8 +101,24 @@ const mainProjects=[
     Repo: ['https://github.com/aabid2947/TransferLearn'],
     Live: '',
     pic:pvPingMc
-
   },
+  {
+    Name: 'Portfolio',
+    Desc:
+      'A personal portfolio built with modern frontend practices to showcase my work, skills, and contact information. Responsive and interactive, hosted on Vercel.',
+    Tech: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Lucide React',
+      'React Router DOM',
+      'TypeScript'
+    ],
+    Repo: ['https://github.com/aabid2947/Portfolio'],
+    Live: 'https://portfolio-alpha-neon-44.vercel.app/',
+    pic:Portfolio
+  }
 ];
 
 // Create a Context for the main projects

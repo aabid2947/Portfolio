@@ -8,7 +8,7 @@ import SkillsSection from "@/components/AboutMe/skills-section";
 import FunFactsSection from "@/components/AboutMe/fun-facts-section";
 import EducationTimeline from "../components/AboutMe/education-section";
 import { GridBackground } from '../components/ui/GridBackgroud.jsx'; // Import the new component
-
+import AchievementSection from "../components/AboutMe/achievment-section.jsx";
 export default function ContactPage() {
   
    
@@ -17,6 +17,7 @@ export default function ContactPage() {
     
         <NavBar />
         <AboutSection />
+        <AchievementSection/>
         <EducationTimeline/>
         <SkillsSection />
         <FunFactsSection />

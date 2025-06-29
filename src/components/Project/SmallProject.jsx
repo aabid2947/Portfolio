@@ -99,12 +99,9 @@ const minorProjects = [
 
 
 const SmallProjectsSection = () => {
-  // The 'formattedItems' constant has been removed as it was causing the issue.
-  // We now pass 'minorProjects' directly to the HoverEffect component.
-
   return (
-    <section className="w-full max-w-7xl mx-auto px-6 lg:px-12">
-      <h2 className="text-3xl font-bold text-yellow-300 mb-6">Minor Projects</h2>
+    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16"> {/* Adjusted padding */}
+      <h2 className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-4 sm:mb-6">Minor Projects</h2> {/* Adjusted heading size and margin */}
       <HoverEffect items={minorProjects} />
     </section>
   );

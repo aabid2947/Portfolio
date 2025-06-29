@@ -2,7 +2,7 @@
 
 import { Github, Instagram, Twitter, Mail, MapPin } from "lucide-react"
 import { useState, useEffect } from "react"
-
+import { socialLinks } from "../utils/socials"
 // Mock API function since we don't have the actual API
 const getAboutMe = async () => {
   return [
@@ -17,22 +17,8 @@ const getAboutMe = async () => {
 }
 
 export default function Footer() {
-  const [socialLink, setSocialLink] = useState({})
 
-  useEffect(() => {
-    const fetchSocialLinks = async () => {
-      try {
-        const fetchedAboutme = await getAboutMe()
-        if (fetchedAboutme) {
-          setSocialLink(fetchedAboutme[0].socialLink)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchSocialLinks()
-  }, [])
+ 
 
   const navigationLinks = [
     {
@@ -119,9 +105,9 @@ export default function Footer() {
               <p className="font-mono text-lg text-yellow-400 font-medium">Follow Me</p>
               <div className="flex gap-3">
                 {[ 
-                  { icon: Github, href: socialLink.github, label: "Github" },
-                  { icon: Instagram, href: socialLink.instagram, label: "Instagram" },
-                  { icon: Twitter, href: socialLink.twitter, label: "Twitter" },
+                  { icon: Github, href: socialLinks.githubLink, label: "Github" },
+                  { icon: Instagram, href: socialLinks.instagramLink, label: "Instagram" },
+                  { icon: Twitter, href: socialLinks.xLink, label: "Twitter" },
                 ].map(({ icon: Icon, href, label }) => (
                   <a
                     key={label}

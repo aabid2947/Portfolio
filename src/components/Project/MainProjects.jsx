@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { getMainProjects } from "../../API/api";
 import { motion } from "framer-motion";
@@ -6,26 +5,8 @@ import { ProjectCard } from "../projectCard"
 import { useMainProjects } from "../../contexts/ProjectContext";
 
 export default function MainProjets() {
-    // const [mainProjets, setMainProjects] = useState(mainProjects);
     const [loading, setLoading] = useState(false)
     const mainProjects = useMainProjects()
-
-
-    // useEffect(() => {
-    //     console.log("Fetching main projects");
-    //     const fetchMainProjects = async () => {
-    //         try {
-    //             const mainProjets = await getMainProjects();
-    //             if (mainProjets) {
-    //                 setLoading(false)
-    //                 setMainProjects(mainProjets);
-    //             }
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     };
-    //     fetchMainProjects();
-    // }, []);
 
     if (loading) {
         return <div className="flex items-center justify-center h-screen ">
@@ -53,16 +34,15 @@ export default function MainProjets() {
 
     return (
         <>
-            <div className="min-h-screen py-16 px-8">
+            <div className="w-full max-w-7xl mx-auto relative pt-16 sm:pt-20 md:pt-24 px-4 sm:px-8"> {/* Adjusted padding */}
                 <div className="mx-auto max-w-7xl">
-                    <h1 className="mb-8 font-mono text-3xl font-bold text-purple-500">#complete-apps</h1>
-                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ">
+                    <h1 className="mb-6 sm:mb-8 font-mono text-2xl sm:text-3xl font-bold text-yellow-300">Major Projects</h1> {/* Adjusted heading size and margin */}
+                    <div className="grid gap-x-2 gap-y-8 sm:grid-cols-1 lg:grid-cols-2"> {/* Added gap-y for vertical spacing between cards on smaller screens */}
                         {mainProjects.map((project) => (
                             <motion.div
                                 key={project.Name}
-                                whileHover={{ x: 8, y: -8, boxShadow: "0px 10px 30px rgb(0, 2, 48)" }}
                                 transition={{ duration: 0.2 }}
-                                className="rounded-lg overflow-hidden"
+                                className="rounded-lg "
                             >
                                 <ProjectCard project={project} />
                             </motion.div>
