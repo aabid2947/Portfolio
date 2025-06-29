@@ -54,15 +54,18 @@ export default function AboutSection() {
           <div className="space-y-8">
             <div className="space-y-4">
               <div className="inline-block">
-                <span className="text-sm font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
-                  Frontend Developer
+                <span className="text-sm m-2 font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
+                  Full-Stack Developer
+                </span>
+                  <span className="text-sm font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
+                  App Developer
                 </span>
               </div>
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
                 Hello, I'm{" "}
                 <span className="relative">
                   <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-gradient-x">
-                    Elias
+                    Aabid
                   </span>
                   <span className="absolute -bottom-2 left-0 h-1 w-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transform scale-x-0 animate-scale-x"></span>
                 </span>
@@ -71,16 +74,13 @@ export default function AboutSection() {
             </div>
 
             <div className="space-y-6">
-              <p className="text-lg leading-relaxed text-zinc-300 animate-fade-in-up delay-300">
-                I'm a self-taught front-end developer based in{" "}
-                <span className="text-yellow-400 font-medium">Kyiv, Ukraine</span>. I transform creative ideas into
-                modern, user-friendly websites from the ground up.
+              <p className="text-base sm:text-lg leading-relaxed text-zinc-300 animate-fade-in-up delay-300">
+                I'm a passionate freelancer and B.Tech student based in{" "}
+                <span className="text-yellow-400 font-medium">India</span>. I specialize in creating powerful and user-friendly web and mobile applications tailored to solve real-world problems.
               </p>
 
-              <p className="text-base leading-relaxed text-zinc-400 animate-fade-in-up delay-500">
-                For over a year, my passion has been turning knowledge into engaging web experiences that help clients
-                establish a strong online presence. I am constantly learning and adapting to the newest technologies to
-                push the boundaries of what's possible on the web.
+              <p className="text-sm sm:text-base leading-relaxed text-zinc-400 animate-fade-in-up delay-500">
+                With a strong foundation in full-stack development, I've built production-ready SaaS tools, mobile apps, and data-driven solutions. I continuously learn and experiment with new technologies to deliver top-notch user experiences and scalable systems.
               </p>
             </div>
 

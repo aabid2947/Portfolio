@@ -66,7 +66,6 @@ export  function HeroSection() {
                 .
               </h1>
             </div>
-
   
 
             {/* Stats */}
