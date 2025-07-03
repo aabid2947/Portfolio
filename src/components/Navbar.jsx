@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, useNavigation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Github, Dribbble, Figma, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import ALogo from "../assets/ALogo.png"
 import RotatingGlowButton from "./ui/RotatingGlowButton";
 import { socialLinks } from "../utils/socials";
 export default function NavMenu() {
-  const navigate = useNavigation()
+  const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -79,14 +79,18 @@ export default function NavMenu() {
             </div>
 
             <div className="hidden sm:block"> {/* Hide on small screens and show on sm and up */}
-              <RotatingGlowButton onClick={()=>navigate("/contact")} text="Contact ME "
-                width="150px" 
-                height="50px" 
+              <RotatingGlowButton
+                text="Hire Me"
+                width="180px"
+                height="54px"
+                onClick={() =>
+                  window.open("https://www.upwork.com/freelancers/~010946d8e216b2221e", "_blank")
+                }
               />
             </div>
             <div className="block sm:hidden"> {/* Show on small screens only */}
               <Button variant="ghost" size="icon" onClick={() => setIsOverlayOpen(true)} className="text-white">
-                <X className="w-6 h-6 rotate-45" /> 
+                <X className="w-6 h-6 rotate-45" />
               </Button>
             </div>
           </nav>
@@ -138,19 +142,20 @@ export default function NavMenu() {
                 {label.toUpperCase()}
               </Link>
             ))}
-          </div>
-
-          <div className="absolute bottom-4 sm:bottom-8 flex space-x-4 sm:space-x-8"> 
+             <div className=" bottom-4 sm:bottom-8 flex space-x-4 sm:space-x-8">
             <a
-              href={socialLinks.linkedIn}
+              href="https://www.upwork.com/freelancers/~010946d8e216b2221e"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-gray-300 transition-colors duration-200 text-sm sm:text-lg font-medium" 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold hover:text-yellow-400 transition-colors duration-300"
             >
-              LINKEDIN
+              Upwork
             </a>
-         
+
           </div>
+          </div>
+
+         
         </div>
       )}
     </>

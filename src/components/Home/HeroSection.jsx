@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import HeroImage from "../../assets/HeroSectionImage.png"; // Replace with your actual image
-
-export  function HeroSection() {
+import RotatingGlowButton from "../ui/RotatingGlowButton";
+export function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // useEffect(() => {
@@ -18,7 +18,7 @@ export  function HeroSection() {
   return (
     <div className="relative px-4 py-16 sm:px-8 sm:py-20 md:py-24 overflow-hidden">
       {/* Mouse-following glow */}
-      
+
 
       {/* Animated background glows */}
       <div className="absolute inset-0 -z-10">
@@ -51,7 +51,7 @@ export  function HeroSection() {
                 <span className="text-sm m-2 font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
                   Full-Stack Developer
                 </span>
-                  <span className="text-sm font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
+                <span className="text-sm font-medium text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full border border-yellow-400/20">
                   App Developer
                 </span>
               </div>
@@ -66,7 +66,7 @@ export  function HeroSection() {
                 .
               </h1>
             </div>
-  
+
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 animate-fade-in-up delay-700">
@@ -82,6 +82,7 @@ export  function HeroSection() {
                 <div className="text-xl sm:text-2xl font-bold text-red-400">100%</div>
                 <div className="text-xs sm:text-sm text-zinc-500">Client Satisfaction</div>
               </div>
+           
             </div>
           </div>
 

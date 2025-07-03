@@ -18,7 +18,7 @@ const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
             : "border-blue-500 text-blue-500 hover:bg-blue-500/10",
           className
         )}
-        ref={ref}
+  
         {...props}
       >
         {children}

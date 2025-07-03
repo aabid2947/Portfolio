@@ -23,7 +23,7 @@ export const HoverEffect = ({ items, className }) => {
           <AnimatePresence>
             {hoveredIndex === idx && (
               <motion.span
-                  className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block rounded-3xl z-0"
+                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block rounded-3xl z-0"
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}
                 animate={{
@@ -43,13 +43,11 @@ export const HoverEffect = ({ items, className }) => {
 
             {/* Buttons for GitHub and Live */}
             <div className="mt-4 flex gap-3">
-              <a href={item.githubLink} target="_blank"   onClick={(e) => {
-    console.log(item.githubLink);
-  }}>
-                <GlowButton  variant="cached">
+              <GlowButton asChild variant="cached">
+                <a href={item.githubLink} onClick={()=>console.log("clicked")} target="_blank" rel="noopener noreferrer">
                   GitRepo <span className="ml-2">↗</span>
-                </GlowButton>
-              </a>
+                </a>
+              </GlowButton>
 
               <a
                 href={item.liveLink || "#"}
