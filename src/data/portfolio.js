@@ -264,17 +264,6 @@ export const journey = [
   },
   {
     type: "work",
-    title: "Tech Team Member",
-    org: "W3B — AI & Blockchain Society, JMI",
-    period: "Sep 2024 — Dec 2025",
-    location: "New Delhi",
-    summary:
-      "Backend developer for the society's official website, supporting its AI and blockchain initiatives.",
-    highlights: [],
-    tags: ["Node.js", "Backend"],
-  },
-  {
-    type: "work",
     title: "Full-Stack Developer",
     org: "Evalzz — Unified Hiring Platform",
     period: "Aug 2024 — Dec 2024",
@@ -287,17 +276,6 @@ export const journey = [
       "Led React.js frontend development with Zustand, cutting database reads by 35% through query optimization.",
     ],
     tags: ["React.js", "Convex", "Zustand", "Python"],
-  },
-  {
-    type: "work",
-    title: "Tech Team Member",
-    org: "IEEE JMI — Student Branch",
-    period: "Jul 2023 — Dec 2025",
-    location: "New Delhi",
-    summary:
-      "Technical team contributions across the student branch's web projects and events.",
-    highlights: [],
-    tags: ["Web", "Community"],
   },
   {
     type: "education",
