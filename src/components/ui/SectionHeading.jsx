@@ -4,7 +4,7 @@ import Reveal from "./Reveal.jsx";
 /** Film-credit style heading: "ACT II · SELECTED WORK" over a big serif title. */
 export default function SectionHeading({ act, kicker, title }) {
   return (
-    <div className="mb-14 md:mb-20">
+    <div data-section-heading className="mb-14 md:mb-20">
       <Reveal>
         <p className="font-mono text-[11px] uppercase tracking-[0.4em] text-gold-400">
           {act} <span className="text-zinc-600">·</span> {kicker}

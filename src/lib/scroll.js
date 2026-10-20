@@ -3,12 +3,25 @@ import Lenis from "lenis";
 
 let instance = null;
 
-/** Smooth-scroll to a CSS selector (e.g. "#work"), falling back to native. */
+/** Smooth-scroll so a section's heading lands just under the fixed header
+ *  ("#top" goes to the very top), falling back to native scrolling. */
 export function scrollToTarget(target) {
+  if (target === "#top") {
+    if (instance) instance.scrollTo(0, { duration: 1.2 });
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+  const section = document.querySelector(target);
+  if (!section) return;
+  // Aim at the heading, not the section's top padding, so a jump never lands
+  // on a screen of empty space above the title.
+  const el = section.querySelector("[data-section-heading]") ?? section;
+  const header = document.querySelector("header")?.offsetHeight ?? 72;
+  const offset = -(header + 24);
   if (instance) {
-    instance.scrollTo(target, { offset: -72, duration: 1.4 });
+    instance.scrollTo(el, { offset, duration: 1.2 });
   } else {
-    document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: "smooth" });
   }
 }
 
