@@ -9,7 +9,6 @@ import aivaShot from "../../assets/aiva.jpeg";
 import sihWinnerImg from "../../assets/sih/sih-winner.jpg";
 import sihTeamImg from "../../assets/sih/sih-team.jpg";
 import sihTrophyImg from "../../assets/sih/sih-trophy.jpg";
-import sihStairsImg from "../../assets/sih/sih-stairs.jpg";
 
 export const profile = {
   firstName: "AABID",
@@ -33,7 +32,6 @@ export const profile = {
       alt: "The SIH 2024 Grand Finale winner's trophy and certificate",
       caption: "Winner's trophy & certificate",
     },
-    { src: sihStairsImg, alt: "Team Paradox on the steps at the Grand Finale", caption: "Team Paradox · JMI" },
   ],
   role: "Full-Stack & React Native Developer",
   tagline:
