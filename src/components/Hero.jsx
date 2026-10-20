@@ -44,7 +44,7 @@ export default function Hero({ started }) {
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden pb-28 pt-24 md:pt-28"
     >
       {/* 3D liquid-gold backdrop (procedural R3F; CSS gold-glow fallback for reduced-motion / no-WebGL) */}
       <HeroBackdrop />
@@ -68,7 +68,7 @@ export default function Hero({ started }) {
           variants={lineVariants}
           initial="hidden"
           animate={started ? "show" : "hidden"}
-          className="mt-6 font-display text-[clamp(3.5rem,14vw,10.5rem)] leading-[0.95] text-zinc-100 [text-shadow:0_2px_50px_rgba(6,6,8,0.55)]"
+          className="mt-6 font-display text-[clamp(3.5rem,min(14vw,17vh),10.5rem)] leading-[0.95] text-zinc-100 [text-shadow:0_2px_50px_rgba(6,6,8,0.55)]"
         >
           <StaggeredLine text={profile.firstName} />
           <StaggeredLine
