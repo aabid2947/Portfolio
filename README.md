@@ -1,8 +1,21 @@
-# React + Vite
+# Md Aabid Hussain — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page portfolio with a cinematic, film-styled look: a 3D hero, smooth scrolling, a scroll-drawn timeline, and a demo video of Gamorite, the esports app I build.
 
-Currently, two official plugins are available:
+**Live:** https://portfolio-alpha-neon-44.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Run it
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build in dist/
+```
+
+## Stack
+
+React 18 · Vite 5 · Tailwind CSS 3.4 · Framer Motion · three.js (React Three Fiber) · Lenis
+
+## Editing content
+
+All text, projects and links live in `src/data/portfolio.js`. The Gamorite demo video, its card loop and poster live in `public/media/`.
