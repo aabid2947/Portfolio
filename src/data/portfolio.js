@@ -5,14 +5,36 @@
 import portraitImg from "../../assets/aabid.jpeg";
 import gamoriteShot from "../../assets/Gamorite.webp";
 import evalzzShot from "../../assets/Evalzz.png";
-import ekycShot from "../../assets/Ekyc.png";
-import tradeflowShot from "../../assets/Tradeflow.png";
 import aivaShot from "../../assets/aiva.jpeg";
+import sihWinnerImg from "../../assets/sih/sih-winner.jpg";
+import sihTeamImg from "../../assets/sih/sih-team.jpg";
+import sihTrophyImg from "../../assets/sih/sih-trophy.jpg";
+import sihStairsImg from "../../assets/sih/sih-stairs.jpg";
 
 export const profile = {
   firstName: "AABID",
   lastName: "HUSSAIN",
   portrait: portraitImg,
+  // About's photo deck, top card first.
+  photos: [
+    { src: portraitImg, alt: "Md Aabid Hussain", caption: "New Delhi, India" },
+    {
+      src: sihWinnerImg,
+      alt: "Aabid holding the Smart India Hackathon 2024 Grand Finale winner's trophy and cheque",
+      caption: "SIH 2024 · Grand Finale winner",
+    },
+    {
+      src: sihTeamImg,
+      alt: "Team Paradox with their trophies and the ₹1,00,000 winner's cheque",
+      caption: "Team Paradox · ₹1,00,000 prize",
+    },
+    {
+      src: sihTrophyImg,
+      alt: "The SIH 2024 Grand Finale winner's trophy and certificate",
+      caption: "Winner's trophy & certificate",
+    },
+    { src: sihStairsImg, alt: "Team Paradox on the steps at the Grand Finale", caption: "Team Paradox · JMI" },
+  ],
   role: "Full-Stack & React Native Developer",
   tagline:
     "1.5+ years shipping Play Store releases to real users. The Gamorite app I build now serves 18,000+ people. I also build AI agents that make your phone calls and hold the conversation for you.",
@@ -91,8 +113,8 @@ export const projects = [
       { v: "Solo", k: "app owner" },
     ],
     role: "Full-stack · sole app owner",
-    video: "/media/gamorite-loop-16x10.mp4",
-    poster: "/media/gamorite-poster.png",
+    video: "/media/gamorite-demo-16x10.mp4",
+    poster: "/media/gamorite-card-poster.png",
     links: [
       {
         label: "Play Store",
@@ -145,94 +167,36 @@ export const projects = [
     gradient: "from-sky-600/40 via-cyan-500/15 to-transparent",
     accent: "#38bdf8",
   },
-  {
-    id: "04",
-    title: "eKYC Platform",
-    image: ekycShot,
-    category: "Background Verification Platform",
-    year: "2025",
-    description:
-      "A full-stack compliance platform integrating 20+ KYC APIs (PAN, Aadhaar, Voter ID, GST) with JWT auth, role-based access control, secure payments with invoice generation, PDF export, and OneSignal notifications — 170+ commits across client and server, deployed on a Hostinger VPS behind Cloudflare.",
-    tags: ["React.js", "Node.js", "MongoDB", "Cloudflare"],
-    metrics: [
-      { v: "20+", k: "KYC APIs integrated" },
-      { v: "170+", k: "commits shipped" },
-      { v: "RBAC", k: "+ secure payments" },
-    ],
-    role: "Full-stack developer",
-    links: [{ label: "Live demo", url: "https://e-kyc-eight.vercel.app" }],
-    gradient: "from-violet-600/40 via-fuchsia-500/15 to-transparent",
-    accent: "#a78bfa",
-  },
-  {
-    id: "05",
-    title: "TradeFlow",
-    image: tradeflowShot,
-    category: "P2P Crypto Marketplace",
-    year: "2025",
-    description:
-      "A secure peer-to-peer marketplace where users buy and sell USDT using FUN tokens — split across a dedicated React client and Node.js API, and one of my most-iterated builds at 140+ commits across the pair.",
-    tags: ["React.js", "Node.js", "JavaScript"],
-    metrics: [
-      { v: "140+", k: "commits across the pair" },
-      { v: "P2P", k: "USDT ⇄ FUN escrow" },
-    ],
-    role: "Full-stack developer",
-    links: [
-      { label: "Live", url: "https://trade-flow-three.vercel.app" },
-      { label: "GitHub", url: "https://github.com/aabid2947/TradeFlow" },
-    ],
-    gradient: "from-amber-500/40 via-yellow-500/15 to-transparent",
-    accent: "#fbbf24",
-  },
-  {
-    id: "06",
-    title: "PvPingMC",
-    category: "E-commerce Storefront",
-    year: "2024",
-    description:
-      "A modern e-commerce storefront for one of the largest Minecraft PvP networks, built on the Tebex Headless API with a 95+ PageSpeed score via code splitting and lazy loading, an automated CI/CD pipeline on Cloudflare Pages, and a Markdown-powered blog — delivered in one month with 100% client satisfaction.",
-    tags: ["React.js", "Tebex API", "Cloudflare Pages"],
-    metrics: [
-      { v: "95+", k: "PageSpeed score" },
-      { v: "1 mo", k: "delivered in" },
-      { v: "100%", k: "client satisfaction" },
-    ],
-    role: "Frontend developer",
-    links: [{ label: "Live store", url: "https://pvpingmc.net/store" }],
-    gradient: "from-zinc-400/30 via-zinc-200/10 to-transparent",
-    accent: "#e4e4e7",
-  },
 ];
 
 // B-roll — smaller but real productions: public repos and live deployments.
 export const archive = [
   {
-    title: "WordSync",
-    year: "2026",
-    blurb:
-      "A Chrome extension bringing Gboard-style word suggestions to any text field in the browser — a personal n-gram model blended with an optional in-browser LLM via WebLLM and WebGPU, fully local and private, seeded by a one-time QR sync from your phone's Gboard dictionary.",
-    tags: ["TypeScript", "WXT", "WebLLM", "Preact"],
-    links: [{ label: "GitHub", url: "https://github.com/aabid2947/WordSync" }],
-  },
-  {
-    title: "VoiceStream",
-    year: "2026",
-    blurb:
-      "A voice-AI proxy caller that phones a hospital on your behalf and books the appointment — speaking as you in first person and answering the receptionist from your saved details. Groq drives the agent brain, Deepgram handles speech, WebRTC carries the call.",
-    tags: ["Python", "Groq", "Deepgram", "WebRTC"],
-    links: [{ label: "GitHub", url: "https://github.com/aabid2947/CallBot" }],
-  },
-  {
-    title: "Yacht Inventory",
+    title: "eKYC Platform",
     year: "2025",
     blurb:
-      "An inventory management dashboard for yachts, built end to end and deployed live on Vercel.",
-    tags: ["React.js", "JavaScript", "Vercel"],
+      "A full-stack background-verification platform integrating 20+ KYC APIs (PAN, Aadhaar, Voter ID, GST), with JWT auth, role-based access, rate limiting, and payments with invoice generation and PDF export — deployed on a VPS behind Cloudflare after security testing.",
+    tags: ["React.js", "Node.js", "MongoDB", "Cloudflare"],
+    links: [{ label: "Live demo", url: "https://e-kyc-eight.vercel.app" }],
+  },
+  {
+    title: "TradeFlow",
+    year: "2025",
+    blurb:
+      "A secure peer-to-peer marketplace where users buy and sell USDT using FUN tokens — a React client and a Node.js API, and one of my most-iterated builds at 140+ commits across the pair.",
+    tags: ["React.js", "Node.js", "JavaScript"],
     links: [
-      { label: "Live", url: "https://yacht-inventory.vercel.app" },
-      { label: "GitHub", url: "https://github.com/aabid2947/Yacht-Inventory" },
+      { label: "Live", url: "https://trade-flow-three.vercel.app" },
+      { label: "GitHub", url: "https://github.com/aabid2947/TradeFlow" },
     ],
+  },
+  {
+    title: "PvPingMC",
+    year: "2024",
+    blurb:
+      "A storefront for one of the largest Minecraft PvP networks, built on the Tebex Headless API with a 95+ PageSpeed score, CI/CD on Cloudflare Pages and a Markdown blog — delivered in a month with 100% client satisfaction.",
+    tags: ["React.js", "Tebex API", "Cloudflare Pages"],
+    links: [{ label: "Live store", url: "https://pvpingmc.net/store" }],
   },
   {
     title: "Tank Turn Tactics",

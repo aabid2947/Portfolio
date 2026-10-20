@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -40,6 +40,23 @@ function ProjectFrame({ project }) {
   const host = primary ? hostOf(primary.url) : "";
   // With a demo video, its poster stands in for it when motion is reduced.
   const still = project.video ? project.poster : project.image;
+  const playsVideo = Boolean(project.video) && !reduce;
+  const videoRef = useRef(null);
+
+  // The demo plays only while the card is on screen, and only starts loading then.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!playsVideo || !v) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, [playsVideo]);
 
   const onMove = (e) => {
     if (reduce || !ref.current) return;
@@ -94,15 +111,15 @@ function ProjectFrame({ project }) {
 
         <div className="relative aspect-[16/10] overflow-hidden bg-ink-900">
           <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`} />
-          {project.video && !reduce ? (
+          {playsVideo ? (
             <video
+              ref={videoRef}
               src={project.video}
               poster={project.poster}
-              autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               aria-label={`${project.title} — app demo`}
               className="absolute inset-0 h-full w-full object-cover"
             />
