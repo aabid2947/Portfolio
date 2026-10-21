@@ -9,6 +9,7 @@ import aivaShot from "../../assets/aiva.jpeg";
 import ekycShot from "../../assets/Ekyc.png";
 import tradeflowShot from "../../assets/Tradeflow.png";
 import tankShot from "../../assets/TankTurnTactics.png";
+import pvpingShot from "../../assets/PvPingMC.png";
 import sihWinnerImg from "../../assets/sih/sih-winner.jpg";
 import sihTeamImg from "../../assets/sih/sih-team.jpg";
 import sihTrophyImg from "../../assets/sih/sih-trophy.jpg";
@@ -134,7 +135,7 @@ export const projects = [
     category: "AI Voice Agent",
     year: "2026",
     description:
-      "An AI assistant that makes your phone calls for you. It dials out through Twilio, speaks on your behalf in the first person and answers the other side live from your saved details, so it can book an appointment start to finish. Around the calls it triages your Gmail, handles email replies, runs reminders and summarizes documents, on always-on workers on AWS with Gemini backed by an automatic Groq fallback.",
+      "An AI assistant that makes your phone calls for you. It dials out through Twilio, introduces itself as AIVA, says up front that the call is AI-generated on your behalf, and answers the other side live from your saved details, so it can book an appointment start to finish. Around the calls it triages your Gmail, handles email replies, runs reminders and summarizes documents, on always-on workers on AWS with Gemini backed by an automatic Groq fallback.",
     tags: ["Flutter", "Python", "Twilio", "LLM agents", "AWS"],
     metrics: [
       { v: "Live", k: "AI phone calls" },
@@ -166,7 +167,7 @@ export const projects = [
       { v: "50k+", k: "users supported" },
     ],
     role: "Full-stack developer",
-    links: [{ label: "Live", url: "https://jobs.evalzz.com" }],
+    links: [{ label: "Live", url: "https://evalz.vercel.app" }],
     gradient: "from-sky-600/40 via-cyan-500/15 to-transparent",
     accent: "#38bdf8",
   },
@@ -197,6 +198,7 @@ export const archive = [
   },
   {
     title: "PvPingMC",
+    image: pvpingShot,
     year: "2024",
     blurb:
       "A storefront for one of the largest Minecraft PvP networks, built on the Tebex Headless API with a 95+ PageSpeed score, CI/CD on Cloudflare Pages and a Markdown blog — delivered in a month with 100% client satisfaction.",
