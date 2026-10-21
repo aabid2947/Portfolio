@@ -1,4 +1,5 @@
 import { Component, Suspense, lazy, useEffect, useRef, useState } from "react";
+import { markHeroReady } from "../lib/heroReady.js";
 
 // All of three/R3F lives behind this dynamic import → kept out of the initial bundle.
 const HeroScene = lazy(() => import("../three/HeroScene.jsx"));
@@ -28,7 +29,9 @@ class CanvasBoundary extends Component {
   static getDerivedStateFromError() {
     return { failed: true };
   }
-  componentDidCatch() {}
+  componentDidCatch() {
+    markHeroReady(); // the scene won't come, so don't hold the preloader for it
+  }
   render() {
     return this.state.failed ? this.props.fallback : this.props.children;
   }
@@ -41,7 +44,9 @@ export default function HeroBackdrop() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setEnabled(!reduce && webglAvailable());
+    const ok = !reduce && webglAvailable();
+    setEnabled(ok);
+    if (!ok) markHeroReady(); // static glow only: nothing to wait for
   }, []);
 
   useEffect(() => {
@@ -64,16 +69,19 @@ export default function HeroBackdrop() {
     };
   }, [enabled]);
 
+  // The glow is always there: it is the halo around the orb (the canvas is
+  // transparent), and it is what shows until the orb fades in, or instead of it.
   return (
     <div ref={wrapRef} className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-      {enabled ? (
-        <CanvasBoundary fallback={<StaticGlow />}>
-          <Suspense fallback={<StaticGlow />}>
-            <HeroScene active={active} />
+      <StaticGlow />
+      {enabled && (
+        <CanvasBoundary fallback={null}>
+          <Suspense fallback={null}>
+            <div className="absolute inset-0">
+              <HeroScene active={active} />
+            </div>
           </Suspense>
         </CanvasBoundary>
-      ) : (
-        <StaticGlow />
       )}
     </div>
   );

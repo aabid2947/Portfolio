@@ -1,8 +1,16 @@
 import * as THREE from "three";
-import { useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, Lightformer, MeshDistortMaterial, Float } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { markHeroReady } from "../lib/heroReady.js";
+
+/* The liquid-gold orb, built to start without a hitch.
+   The first version used a physical material lit by a baked studio
+   environment, plus a bloom pass. Compiling those shaders took ~1.4 s on an
+   integrated GPU, and on Windows that stalls every repaint in the tab, so the
+   loading counter froze. Now the studio reflections are painted once into a
+   matcap, the wobble is the same simplex-noise displacement on a cheap matcap
+   material, the glow is CSS behind a transparent canvas, and the few shaders
+   left compile in the background before the first frame. */
 
 /* Quality is resolved once on mount — no resize churn for a hero backdrop. */
 function getQuality() {
@@ -12,8 +20,7 @@ function getQuality() {
     mobile,
     detail: mobile ? 4 : 6, // icosahedron subdivisions → smoothness of the morph
     particles: mobile ? 450 : 1300,
-    maxDpr: mobile ? 1.25 : 1.5, // cap retina overdraw: bloom runs on every pixel
-    bloom: mobile ? 0.55 : 0.9,
+    maxDpr: mobile ? 1.25 : 1.5, // full-screen canvas with MSAA: keep the pixel count sane
   };
 }
 
@@ -31,7 +38,118 @@ function useGlobalPointer() {
   return ref;
 }
 
-/* ---- atmospheric gold rim (fresnel halo, additive, bloom-fed) ---- */
+/* ---- the studio, painted once: what the polished gold sphere reflects ----
+   Traced from the old lit orb. Positions are on the sphere as the camera sees
+   it (x right, y up, -1..1): an amber softbox across the top, an orange strip
+   light curving down the left edge, a dim beige panel right of centre, all on
+   a near-black bronze body. Edges are blurred like the old 0.16 roughness. */
+function makeGoldMatcap(size = 512) {
+  const c = document.createElement("canvas");
+  c.width = c.height = size;
+  const g = c.getContext("2d");
+  const s = size / 2;
+  const X = (x) => s + x * s;
+  const Y = (y) => s - y * s;
+  const soft = (px) => {
+    if ("filter" in g) g.filter = px ? `blur(${px}px)` : "none";
+  };
+  const panel = (x, y, w, h, r) => {
+    g.beginPath();
+    if (g.roundRect) g.roundRect(X(x), Y(y), w * s, h * s, r * s);
+    else g.rect(X(x), Y(y), w * s, h * s);
+    g.fill();
+  };
+
+  const body = g.createRadialGradient(X(0), Y(0.25), 0, X(0), Y(0), s);
+  body.addColorStop(0, "#170f06");
+  body.addColorStop(0.75, "#0b0704");
+  body.addColorStop(1, "#050302");
+  g.fillStyle = body;
+  g.fillRect(0, 0, size, size);
+
+  soft(size * 0.014);
+  // amber softbox across the top; its top edge bows, as on a sphere
+  g.fillStyle = "#a8783a";
+  g.beginPath();
+  g.moveTo(X(-0.47), Y(0.47));
+  g.quadraticCurveTo(X(-0.05), Y(0.62), X(0.41), Y(0.4));
+  g.lineTo(X(0.35), Y(0));
+  g.quadraticCurveTo(X(0), Y(-0.03), X(-0.4), Y(0));
+  g.closePath();
+  g.fill();
+
+  // orange strip light: a gentle curve hugging the left edge
+  g.strokeStyle = "#bb761c";
+  g.lineCap = "round";
+  g.lineWidth = 0.18 * s;
+  g.beginPath();
+  g.arc(X(0.6), Y(0), 1.4 * s, Math.PI * 0.872, Math.PI * 1.128);
+  g.stroke();
+
+  g.fillStyle = "rgba(100,92,74,0.75)"; // dim beige panel, right of centre
+  panel(0.42, 0.08, 0.28, 0.38, 0.06);
+  soft(0);
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+/* 3D simplex noise (Ashima Arts / Stefan Gustavson, MIT) — the same wobble
+   drei's MeshDistortMaterial used. */
+const SIMPLEX = /* glsl */ `
+  vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+  vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+  vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
+  vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+  float snoise(vec3 v) {
+    const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
+    const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+    vec3 i = floor(v + dot(v, C.yyy));
+    vec3 x0 = v - i + dot(i, C.xxx);
+    vec3 g = step(x0.yzx, x0.xyz);
+    vec3 l = 1.0 - g;
+    vec3 i1 = min(g.xyz, l.zxy);
+    vec3 i2 = max(g.xyz, l.zxy);
+    vec3 x1 = x0 - i1 + C.xxx;
+    vec3 x2 = x0 - i2 + C.yyy;
+    vec3 x3 = x0 - D.yyy;
+    i = mod289(i);
+    vec4 p = permute(permute(permute(
+              i.z + vec4(0.0, i1.z, i2.z, 1.0))
+            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+    float n_ = 0.142857142857;
+    vec3 ns = n_ * D.wyz - D.xzx;
+    vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+    vec4 x_ = floor(j * ns.z);
+    vec4 y_ = floor(j - 7.0 * x_);
+    vec4 x = x_ * ns.x + ns.yyyy;
+    vec4 y = y_ * ns.x + ns.yyyy;
+    vec4 h = 1.0 - abs(x) - abs(y);
+    vec4 b0 = vec4(x.xy, y.xy);
+    vec4 b1 = vec4(x.zw, y.zw);
+    vec4 s0 = floor(b0) * 2.0 + 1.0;
+    vec4 s1 = floor(b1) * 2.0 + 1.0;
+    vec4 sh = -step(h, vec4(0.0));
+    vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+    vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+    vec3 p0 = vec3(a0.xy, h.x);
+    vec3 p1 = vec3(a0.zw, h.y);
+    vec3 p2 = vec3(a1.xy, h.z);
+    vec3 p3 = vec3(a1.zw, h.w);
+    vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
+    p0 *= norm.x;
+    p1 *= norm.y;
+    p2 *= norm.z;
+    p3 *= norm.w;
+    vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
+    m = m * m;
+    return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+  }
+`;
+
+/* ---- atmospheric gold rim (fresnel halo, additive) ---- */
 const fresnelVert = /* glsl */ `
   varying vec3 vN;
   varying vec3 vV;
@@ -54,31 +172,45 @@ const fresnelFrag = /* glsl */ `
   }
 `;
 
+const DISTORT = 0.36;
+const SPEED = 1.5;
+
 function LiquidOrb({ detail }) {
   const mesh = useRef();
+  const time = useRef({ value: 0 });
+  const material = useMemo(() => {
+    const m = new THREE.MeshMatcapMaterial({ matcap: makeGoldMatcap() });
+    m.toneMapped = false; // the matcap is painted in final colours
+    m.onBeforeCompile = (shader) => {
+      shader.uniforms.time = time.current;
+      shader.uniforms.distort = { value: DISTORT };
+      shader.vertexShader = `uniform float time;\nuniform float distort;\n${SIMPLEX}\n${shader.vertexShader}`.replace(
+        "#include <begin_vertex>",
+        `float noise = snoise(vec3(position / 2.0 + (time / 50.0) * 5.0));
+         vec3 transformed = position * (noise * pow(distort, 2.0) + 1.0);`
+      );
+    };
+    m.customProgramCacheKey = () => "aiva-liquid-gold";
+    return m;
+  }, []);
+  useEffect(() => () => (material.matcap.dispose(), material.dispose()), [material]);
   const rim = useMemo(
     () => ({
-      uColor: { value: new THREE.Color("#f0d491") },
-      uPower: { value: 3.0 },
-      uIntensity: { value: 1.15 },
+      // pale cream and broad: bloom used to whiten and spread this rim
+      uColor: { value: new THREE.Color("#efe3c0") },
+      uPower: { value: 2.0 },
+      uIntensity: { value: 1.35 },
     }),
     []
   );
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
+    time.current.value = state.clock.elapsedTime * SPEED;
     if (mesh.current) mesh.current.rotation.y += delta * 0.08;
   });
   return (
     <group>
-      <mesh ref={mesh}>
+      <mesh ref={mesh} material={material}>
         <icosahedronGeometry args={[1.5, detail]} />
-        <MeshDistortMaterial
-          color="#7c5a23"
-          metalness={1}
-          roughness={0.16}
-          envMapIntensity={1.5}
-          distort={0.36}
-          speed={1.5}
-        />
       </mesh>
       <mesh scale={1.34}>
         <icosahedronGeometry args={[1.5, 4]} />
@@ -143,7 +275,7 @@ function Dust({ count }) {
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uSize: { value: 22 },
+      uSize: { value: 24 },
       uColor: { value: new THREE.Color("#e3b964") },
     }),
     []
@@ -169,24 +301,21 @@ function Dust({ count }) {
   );
 }
 
-/* ---- procedural studio lighting baked once → reflections, no HDR download ---- */
-function StudioEnv() {
-  return (
-    <Environment resolution={256} frames={1}>
-      <color attach="background" args={["#0a0a0f"]} />
-      <Lightformer form="rect" intensity={1.4} color="#fff4e0" position={[0, 3, 3]} scale={[7, 4, 1]} />
-      <Lightformer
-        form="rect"
-        intensity={2.4}
-        color="#e3b964"
-        position={[-5, 1, -1]}
-        rotation={[0, Math.PI / 3, 0]}
-        scale={[3, 7, 1]}
-      />
-      <Lightformer form="rect" intensity={0.7} color="#9db4ff" position={[5, -1, 2]} scale={[3, 3, 1]} />
-      <Lightformer form="ring" intensity={1.5} color="#f0d491" position={[3, 3, 4]} scale={2.2} />
-    </Environment>
-  );
+/* The same gentle bob and sway drei's <Float> gave (speed 1.1, rotation 0.35,
+   float 0.7), without pulling in drei. */
+function Float({ children }) {
+  const ref = useRef();
+  const offset = useRef(Math.random() * 10000);
+  useFrame((state) => {
+    const g = ref.current;
+    if (!g) return;
+    const t = ((offset.current + state.clock.elapsedTime) / 4) * 1.1;
+    g.rotation.x = (Math.cos(t) / 8) * 0.35;
+    g.rotation.y = (Math.sin(t) / 8) * 0.35;
+    g.rotation.z = (Math.sin(t) / 20) * 0.35;
+    g.position.y = (Math.sin(t) / 10) * 0.7;
+  });
+  return <group ref={ref}>{children}</group>;
 }
 
 function Scene({ q }) {
@@ -207,34 +336,56 @@ function Scene({ q }) {
   return (
     <>
       <group ref={orbGroup}>
-        <Float speed={1.1} rotationIntensity={0.35} floatIntensity={0.7}>
+        <Float>
           <LiquidOrb detail={q.detail} />
         </Float>
       </group>
       <Dust count={q.particles} />
-      <StudioEnv />
     </>
   );
 }
 
+/* Compiles every shader in the scene before the first frame, in the
+   background where the browser supports it (KHR_parallel_shader_compile), so
+   no frame ever waits on a compile. */
+function Warmup({ onWarm }) {
+  const { gl, scene, camera } = useThree();
+  useEffect(() => {
+    let live = true;
+    const done = () => live && onWarm();
+    gl.compileAsync(scene, camera).then(done, done);
+    return () => {
+      live = false;
+    };
+  }, [gl, scene, camera, onWarm]);
+  return null;
+}
+
+/* Tells the preloader the scene is up once a few frames have drawn. */
+function ReadySignal() {
+  const frames = useRef(0);
+  useFrame(() => {
+    frames.current += 1;
+    if (frames.current === 3) markHeroReady();
+  });
+  return null;
+}
+
 export default function HeroScene({ active = true }) {
   const q = useMemo(getQuality, []);
+  const [warm, setWarm] = useState(false);
+  const onWarm = useCallback(() => setWarm(true), []);
   return (
     <Canvas
       dpr={[1, q.maxDpr]}
-      // No canvas MSAA: the effect composer renders into its own targets, so
-      // a multisampled default framebuffer is only wasted GPU memory.
-      gl={{ antialias: false, powerPreference: "high-performance" }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 6.2], fov: 36 }}
-      frameloop={active ? "always" : "never"}
+      frameloop={warm && active ? "always" : "never"}
+      style={{ opacity: warm ? 1 : 0, transition: "opacity 0.9s ease" }}
     >
-      <color attach="background" args={["#060608"]} />
       <Scene q={q} />
-      {/* multisampling defaults to 8x here, i.e. eight samples per pixel per
-          frame on a full-screen canvas. Bloom softens edges anyway. */}
-      <EffectComposer disableNormalPass multisampling={0}>
-        <Bloom mipmapBlur intensity={q.bloom} luminanceThreshold={0.5} luminanceSmoothing={0.25} radius={0.8} />
-      </EffectComposer>
+      <Warmup onWarm={onWarm} />
+      {warm && <ReadySignal />}
     </Canvas>
   );
 }
