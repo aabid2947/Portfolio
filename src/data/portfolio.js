@@ -39,14 +39,15 @@ export const profile = {
   ],
   role: "Full-Stack & React Native Developer",
   tagline:
-    "1.5+ years shipping Play Store releases to real users. The Gamorite app I build now serves 18,000+ people. I also build AI agents that make your phone calls and hold the conversation for you.",
+    "1.5+ years shipping Play Store releases to real users. The Gamorite app I build now serves 18,000+ people. I also ship AI to production: Claude Vision that scores esports matches straight from screenshots, and voice agents that make your phone calls for you.",
   location: "New Delhi, India",
   email: "aabidhussainpas@gmail.com",
   availability: "Open to full-time roles & freelance",
   bio: [
     "I'm Md Aabid Hussain, a full-stack and React Native developer based in New Delhi. For 1.5+ years I've shipped Play Store releases to real users: five months on TejAgro, an agri-commerce app for farmers, and the rest on Gamorite, where I own the app that now serves 18,000+ users.",
-    "My work spans the whole stack: React Native and Flutter apps, React frontends with Redux Toolkit and Zustand, Go, Node.js and Python backends, WebSocket live messaging, OAuth 2.0 flows, FCM push notifications, payment gateways, and AI integrations with the Gemini and Claude APIs.",
-    "Outside client work I chase hard problems — winning the Smart India Hackathon 2024 Grand Finals, ranking top 100 of 32,000+ teams in the Amazon ML Challenge 2024, and building for the W3B AI & Blockchain Society and the IEEE student branch at JMI.",
+    "Most of my recent work is applied AI. At Gamorite I built Smart Scoring: tournament organizers upload end-of-match leaderboard screenshots, and Claude Vision reads every player's kills and placement into structured results, matched to the right team and published without manual entry. On Aiva I built the LLM agents that route each chat request to the right tool, plus a real-time voice agent that phones a clinic and books the appointment.",
+  "Underneath that is the whole stack: React Native and Flutter apps, React frontends, Go, Node.js and Python backends, WebSocket messaging, OAuth 2.0, FCM push and payment gateways.",
+    "Outside work I chase hard problems: I won the Smart India Hackathon 2024 Grand Finale and ranked in the top 100 of 32,000+ teams in the Amazon ML Challenge 2024.",
   ],
   socials: [
     { label: "GitHub", url: "https://github.com/aabid2947" },
@@ -60,7 +61,7 @@ export const profile = {
     { value: 1.5, decimals: 1, suffix: "+", label: "Years shipping to the Play Store" },
     { value: 18, suffix: "k+", label: "Users on Gamorite" },
     { value: 2, suffix: "", label: "Apps live on Play Store" },
-    { value: 20, suffix: "+", label: "KYC APIs integrated" },
+    { value: 1, suffix: "st", label: "Smart India Hackathon 2024" },
   ],
   skills: [
     "React",
@@ -70,6 +71,7 @@ export const profile = {
     "Node.js",
     "Express.js",
     "Python",
+    "Go",
     "MongoDB",
     "PostgreSQL",
     "Redux Toolkit",
@@ -78,7 +80,8 @@ export const profile = {
     "OAuth 2.0",
     "Docker",
     "CI/CD",
-    "Gemini & Claude APIs",
+    "Claude Vision",
+    "LLM agents",
   ],
   // Grouped form — drives the accessible / reduced-motion fallback for the 3D sphere.
   skillGroups: [
@@ -88,11 +91,11 @@ export const profile = {
     },
     {
       label: "Backend",
-      items: ["Node.js", "Express.js", "Python", "MongoDB", "PostgreSQL", "WebSockets"],
+      items: ["Go", "Node.js", "Express.js", "Python", "MongoDB", "PostgreSQL", "WebSockets"],
     },
     {
-      label: "Platform & AI",
-      items: ["OAuth 2.0", "Docker", "CI/CD", "Gemini & Claude APIs"],
+      label: "AI & Platform",
+      items: ["Claude Vision", "LLM agents", "Gemini + Groq", "OAuth 2.0", "Docker", "CI/CD"],
     },
   ],
 };
@@ -233,9 +236,11 @@ export const journey = [
       "Sole owner of the app codebase: review every PR from other contributors and ship every Play Store release.",
       "Triage crashes and ANRs from Play Console every release cycle, with Sentry and Google Analytics for error tracking and usage insight.",
       "Built an Instagram-style clips feed that preloads the first 1–2 seconds of the next 4–5 clips as soon as the dashboard opens, so playback starts instantly.",
-      "Integrated Claude Vision for image analysis that returns structured JSON, and built media storage on Cloudflare buckets.",
+      "Built Smart Scoring: Claude Vision reads BGMI and Free Fire leaderboard screenshots into per-player kills and placements, fuzzy-matches each in-game name to the team roster, stitches multi-screenshot leaderboards together by rank, and falls back to Google Cloud Vision.",
+      "Ran it as a Go worker pool with a shared rate-limit circuit breaker (it honours Anthropic's Retry-After), so 10 parallel workers back off together instead of hammering the API.",
+      "Kept AI spend bounded: captain screenshots are only read for players the organizer's screenshot couldn't resolve, and the feature is gated to the paid tier with usage limits.",
     ],
-    tags: ["React Native", "Go", "Sentry", "Play Console"],
+    tags: ["React Native", "Go", "Claude Vision", "Play Console"],
     links: [
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.gamorite" },
     ],
@@ -279,9 +284,9 @@ export const journey = [
     period: "Aug 2024 — Dec 2024",
     location: "Remote",
     summary:
-      "Scaled platform infrastructure to support 50,000+ users at zero infrastructure cost (excluding LLM APIs).",
+      "Full-stack work on a hiring platform, built to scale to 50,000+ users on zero infrastructure cost (LLM APIs aside).",
     highlights: [
-      "Served 500+ registered users with 800 monthly actives through Convex DB indexing and query optimization.",
+      "Kept it fast for 800 monthly active users with Convex DB indexing and query optimization.",
       "Built Python backend scripts for data processing and automation; integrated Zoho mailing and Clerk authentication.",
       "Led React.js frontend development with Zustand, cutting database reads by 35% through query optimization.",
     ],
