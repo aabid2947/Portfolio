@@ -35,7 +35,7 @@ function Stat({ value, decimals = 0, suffix, label, delay }) {
 
 export default function About() {
   return (
-    <section id="about" className="relative scroll-mt-20 py-24 md:py-36">
+    <section id="about" className="relative scroll-mt-20 py-14 md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading act="Act I" kicker="The Character" title="About me" />
 

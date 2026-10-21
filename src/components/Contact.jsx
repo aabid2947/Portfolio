@@ -18,7 +18,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative scroll-mt-20 overflow-hidden py-24 md:py-36">
+    <section id="contact" className="relative scroll-mt-20 overflow-hidden py-14 md:py-20">
       <div className="absolute bottom-0 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-gold-500/[0.07] blur-[160px]" />
 
       <div className="relative mx-auto max-w-6xl px-6">

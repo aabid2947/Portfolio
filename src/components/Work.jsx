@@ -283,7 +283,7 @@ function ArchiveCard({ item, index }) {
 
 export default function Work() {
   return (
-    <section id="work" className="relative scroll-mt-20 py-24 md:py-36">
+    <section id="work" className="relative scroll-mt-20 py-14 md:py-20">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading act="Act II" kicker="The Plot" title="Selected work" />
         <div className="flex flex-col gap-24 md:gap-32">

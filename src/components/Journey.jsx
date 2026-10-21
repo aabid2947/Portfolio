@@ -82,7 +82,7 @@ export default function Journey() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 80, damping: 22 });
 
   return (
-    <section id="journey" className="relative scroll-mt-20 py-24 md:py-36">
+    <section id="journey" className="relative scroll-mt-20 py-14 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         <SectionHeading
           act="Act III"
