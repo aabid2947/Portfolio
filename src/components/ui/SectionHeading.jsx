@@ -10,17 +10,22 @@ export default function SectionHeading({ act, kicker, title }) {
           {act} <span className="text-zinc-600">·</span> {kicker}
         </p>
       </Reveal>
-      <div className="mt-4 overflow-hidden">
+      {/* Watch the clipping wrapper, not the title: the title starts pushed out
+          of the wrapper, so it never counts as "in view" on its own. */}
+      <motion.div
+        className="mt-4 overflow-hidden"
+        initial="hidden"
+        whileInView="shown"
+        viewport={{ once: true, margin: "-60px" }}
+      >
         <motion.h2
-          initial={{ y: "115%" }}
-          whileInView={{ y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
+          variants={{ hidden: { y: "115%" }, shown: { y: 0 } }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-5xl leading-[1.05] text-zinc-100 md:text-7xl"
         >
           {title}
         </motion.h2>
-      </div>
+      </motion.div>
       <Reveal delay={0.25} className="mt-6">
         <div className="h-px w-24 bg-gradient-to-r from-gold-500 to-transparent" />
       </Reveal>
