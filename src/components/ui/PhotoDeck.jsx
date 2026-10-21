@@ -53,6 +53,7 @@ export default function PhotoDeck({ photos, interval = 3200 }) {
                 src={photo.src}
                 alt={depth === 0 ? photo.alt : ""}
                 loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-ink-950/10" />

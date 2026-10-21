@@ -12,7 +12,7 @@ function getQuality() {
     mobile,
     detail: mobile ? 4 : 6, // icosahedron subdivisions → smoothness of the morph
     particles: mobile ? 450 : 1300,
-    maxDpr: mobile ? 1.5 : 1.8, // cap retina overdraw
+    maxDpr: mobile ? 1.25 : 1.5, // cap retina overdraw: bloom runs on every pixel
     bloom: mobile ? 0.55 : 0.9,
   };
 }
@@ -222,13 +222,17 @@ export default function HeroScene({ active = true }) {
   return (
     <Canvas
       dpr={[1, q.maxDpr]}
-      gl={{ antialias: true, powerPreference: "high-performance" }}
+      // No canvas MSAA: the effect composer renders into its own targets, so
+      // a multisampled default framebuffer is only wasted GPU memory.
+      gl={{ antialias: false, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 6.2], fov: 36 }}
       frameloop={active ? "always" : "never"}
     >
       <color attach="background" args={["#060608"]} />
       <Scene q={q} />
-      <EffectComposer disableNormalPass>
+      {/* multisampling defaults to 8x here, i.e. eight samples per pixel per
+          frame on a full-screen canvas. Bloom softens edges anyway. */}
+      <EffectComposer disableNormalPass multisampling={0}>
         <Bloom mipmapBlur intensity={q.bloom} luminanceThreshold={0.5} luminanceSmoothing={0.25} radius={0.8} />
       </EffectComposer>
     </Canvas>

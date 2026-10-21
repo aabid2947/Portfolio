@@ -4,12 +4,12 @@
 
 import portraitImg from "../../assets/aabid.jpeg";
 import gamoriteShot from "../../assets/Gamorite.webp";
-import evalzzShot from "../../assets/Evalzz.png";
+import evalzzShot from "../../assets/Evalzz.webp";
 import aivaShot from "../../assets/aiva.jpeg";
-import ekycShot from "../../assets/Ekyc.png";
-import tradeflowShot from "../../assets/Tradeflow.png";
-import tankShot from "../../assets/TankTurnTactics.png";
-import pvpingShot from "../../assets/PvPingMC.png";
+import ekycShot from "../../assets/Ekyc.webp";
+import tradeflowShot from "../../assets/Tradeflow.webp";
+import tankShot from "../../assets/TankTurnTactics.webp";
+import pvpingShot from "../../assets/PvPingMC.webp";
 import sihWinnerImg from "../../assets/sih/sih-winner.jpg";
 import sihTeamImg from "../../assets/sih/sih-team.jpg";
 import sihTrophyImg from "../../assets/sih/sih-trophy.jpg";
@@ -119,7 +119,7 @@ export const projects = [
     ],
     role: "Full-stack · sole app owner",
     video: "/media/gamorite-demo-16x10.mp4",
-    poster: "/media/gamorite-card-poster.png",
+    poster: "/media/gamorite-card-poster.webp",
     links: [
       {
         label: "Play Store",
@@ -151,7 +151,7 @@ export const projects = [
       { label: "Backend code", url: "https://github.com/aabid2947/AivaBackend" },
     ],
     video: "/media/aiva-demo-16x10.mp4",
-    poster: "/media/aiva-card-poster.png",
+    poster: "/media/aiva-card-poster.webp",
     gradient: "from-rose-600/40 via-red-500/15 to-transparent",
     accent: "#fb7185",
   },

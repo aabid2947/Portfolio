@@ -124,21 +124,15 @@ function ProjectFrame({ project }) {
               className="absolute inset-0 h-full w-full object-cover"
             />
           ) : still ? (
-            <>
-              <img
-                src={still}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl"
-              />
-              <img
-                src={still}
-                alt={`${project.title} — screenshot`}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover object-top"
-              />
-            </>
+            // One image. A blurred copy used to sit behind it, fully covered,
+            // so it only cost a 40px blur filter and a second decode.
+            <img
+              src={still}
+              alt={`${project.title} — screenshot`}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover object-top"
+            />
           ) : (
             <span
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[6rem] italic opacity-90"
@@ -160,7 +154,7 @@ function ProjectFrame({ project }) {
           {project.metrics.map((m) => (
             <div
               key={m.k}
-              className="flex items-baseline gap-2 rounded-lg border border-gold-500/20 bg-ink-950/85 px-3 py-2 shadow-xl backdrop-blur-md"
+              className="flex items-baseline gap-2 rounded-lg border border-gold-500/20 bg-ink-950/90 px-3 py-2 shadow-xl"
             >
               <span className="font-display text-lg leading-none text-gold-300">{m.v}</span>
               <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-zinc-500">
@@ -279,6 +273,7 @@ function ArchiveCard({ item, index }) {
                 src={item.image}
                 alt={`${item.title} screenshot`}
                 loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover object-top"
               />
             ) : (

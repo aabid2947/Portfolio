@@ -67,6 +67,9 @@ function Sphere({ skills }) {
     wrap.addEventListener("pointermove", onMove);
     wrap.addEventListener("pointerleave", onLeave);
 
+    // Last z-index written per tag, so the stacking order is only touched when
+    // it actually changes (writing it every frame forces a style recalc).
+    const lastZ = [];
     let raf;
     const tick = () => {
       if (!visibleRef.current || document.hidden) {
@@ -97,9 +100,15 @@ function Sphere({ skills }) {
         const depth = (z2 + 1) / 2; // 0 (back) → 1 (front)
         const scale = 0.62 + depth * 0.55;
         el.style.transform = `translate(-50%,-50%) translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, ${z.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-        el.style.opacity = (0.4 + depth * 0.6).toFixed(3);
-        el.style.zIndex = String(Math.round(depth * 100));
-        el.style.filter = depth < 0.5 ? `blur(${((0.5 - depth) * 2.2).toFixed(2)}px)` : "none";
+        // Depth reads through scale and opacity only. A per-frame blur() on
+        // the back tags (and a backdrop blur on every tag) made the browser
+        // redo expensive filter work every frame and stuttered the scroll.
+        el.style.opacity = (0.3 + depth * 0.7).toFixed(3);
+        const zi = Math.round(depth * 20);
+        if (lastZ[i] !== zi) {
+          lastZ[i] = zi;
+          el.style.zIndex = String(zi);
+        }
       }
       raf = requestAnimationFrame(tick);
     };
@@ -122,14 +131,14 @@ function Sphere({ skills }) {
       aria-label={`Technologies: ${skills.join(", ")}`}
     >
       {/* core glow the tags orbit — gives the cloud a luminous centre to read against */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(227,185,100,0.22),transparent_70%)] blur-2xl" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(240,212,145,0.35),transparent_72%)] blur-md" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(227,185,100,0.2),transparent_70%)]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(240,212,145,0.3),transparent_72%)]" />
       <div className="absolute inset-0 [transform-style:preserve-3d]">
         {skills.map((skill, i) => (
           <span
             key={skill}
             ref={(el) => (itemRefs.current[i] = el)}
-            className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full border border-gold-500/20 bg-ink-900/70 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-300 backdrop-blur-sm transition-colors duration-300 hover:border-gold-400/70 hover:text-gold-200"
+            className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full border border-gold-500/20 bg-ink-900/90 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.15em] text-zinc-300 transition-colors duration-300 hover:border-gold-400/70 hover:text-gold-200"
             style={{ willChange: "transform, opacity" }}
           >
             {skill}
