@@ -240,6 +240,20 @@ function ArchiveCard({ item, index }) {
   return (
     <Reveal delay={0.06 * (index % 4)} className="h-full">
       <div className="group flex h-full flex-col rounded-2xl border border-white/5 bg-ink-900/60 p-6 transition-colors duration-500 hover:border-gold-500/30">
+        <div className="-mx-2 -mt-2 mb-5 aspect-[16/9] overflow-hidden rounded-xl border border-white/5 bg-ink-950">
+          {item.image ? (
+            <img
+              src={item.image}
+              alt={`${item.title} screenshot`}
+              loading="lazy"
+              className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gold-500/15 via-ink-900 to-ink-950">
+              <span className="font-display text-xl text-zinc-400">{item.title}</span>
+            </div>
+          )}
+        </div>
         <div className="flex items-baseline justify-between gap-3">
           <h4 className="font-display text-2xl text-zinc-100 transition-colors duration-300 group-hover:text-gold-300">
             {item.title}

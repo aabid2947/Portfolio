@@ -6,6 +6,9 @@ import portraitImg from "../../assets/aabid.jpeg";
 import gamoriteShot from "../../assets/Gamorite.webp";
 import evalzzShot from "../../assets/Evalzz.png";
 import aivaShot from "../../assets/aiva.jpeg";
+import ekycShot from "../../assets/Ekyc.png";
+import tradeflowShot from "../../assets/Tradeflow.png";
+import tankShot from "../../assets/TankTurnTactics.png";
 import sihWinnerImg from "../../assets/sih/sih-winner.jpg";
 import sihTeamImg from "../../assets/sih/sih-team.jpg";
 import sihTrophyImg from "../../assets/sih/sih-trophy.jpg";
@@ -143,6 +146,8 @@ export const projects = [
       { label: "App code", url: "https://github.com/aabid2947/Aiva" },
       { label: "Backend code", url: "https://github.com/aabid2947/AivaBackend" },
     ],
+    video: "/media/aiva-demo-16x10.mp4",
+    poster: "/media/aiva-card-poster.png",
     gradient: "from-rose-600/40 via-red-500/15 to-transparent",
     accent: "#fb7185",
   },
@@ -171,6 +176,7 @@ export const projects = [
 export const archive = [
   {
     title: "eKYC Platform",
+    image: ekycShot,
     year: "2025",
     blurb:
       "A full-stack background-verification platform integrating 20+ KYC APIs (PAN, Aadhaar, Voter ID, GST), with JWT auth, role-based access, rate limiting, and payments with invoice generation and PDF export — deployed on a VPS behind Cloudflare after security testing.",
@@ -179,6 +185,7 @@ export const archive = [
   },
   {
     title: "TradeFlow",
+    image: tradeflowShot,
     year: "2025",
     blurb:
       "A secure peer-to-peer marketplace where users buy and sell USDT using FUN tokens — a React client and a Node.js API, and one of my most-iterated builds at 140+ commits across the pair.",
@@ -198,6 +205,7 @@ export const archive = [
   },
   {
     title: "Tank Turn Tactics",
+    image: tankShot,
     year: "2025",
     blurb:
       "A multiplayer turn-based strategy game with real-time actions on a dynamic grid — playable live in the browser.",
