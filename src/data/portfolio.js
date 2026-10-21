@@ -42,6 +42,7 @@ export const profile = {
     "1.5+ years shipping Play Store releases to real users. The Gamorite app I build now serves 18,000+ people. I also ship AI to production: Claude Vision that scores esports matches straight from screenshots, and voice agents that make your phone calls for you.",
   location: "New Delhi, India",
   email: "aabidhussainpas@gmail.com",
+  phone: { display: "+91 82647 82290", tel: "+918264782290" },
   availability: "Open to full-time roles & freelance",
   bio: [
     "I'm Md Aabid Hussain, a full-stack and React Native developer based in New Delhi. For 1.5+ years I've shipped Play Store releases to real users: five months on TejAgro, an agri-commerce app for farmers, and the rest on Gamorite, where I own the app that now serves 18,000+ users.",

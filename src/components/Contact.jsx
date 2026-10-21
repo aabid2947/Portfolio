@@ -41,6 +41,13 @@ export default function Contact() {
                 {profile.email}
                 <span className="mt-2 block h-px w-full origin-left scale-x-0 bg-gold-400 transition-transform duration-500 group-hover:scale-x-100" />
               </a>
+              <a
+                href={`tel:${profile.phone.tel}`}
+                className="group mt-4 block w-fit font-mono text-lg tracking-wide text-zinc-300 transition-colors hover:text-gold-300 md:text-xl"
+              >
+                {profile.phone.display}
+                <span className="mt-2 block h-px w-full origin-left scale-x-0 bg-gold-400 transition-transform duration-500 group-hover:scale-x-100" />
+              </a>
             </Reveal>
             <Reveal delay={0.25}>
               <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
