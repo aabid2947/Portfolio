@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionTemplate,
@@ -236,46 +236,88 @@ function ProjectRow({ project, index }) {
   );
 }
 
+/* Archive card that flips: the screenshot on the front, the story on the back.
+   Hover flips it on desktop; tap (or Enter/Space) flips it on touch screens.
+   With reduced motion the back simply fades in instead of rotating. */
 function ArchiveCard({ item, index }) {
+  const [flipped, setFlipped] = useState(false);
+  const reduce = useReducedMotion();
+  const face = "absolute inset-0 overflow-hidden rounded-2xl border border-white/5 [backface-visibility:hidden]";
+  const toggle = () => setFlipped((f) => !f);
+  // Touch screens fire a fake hover on tap, which would undo the tap flip.
+  const canHover = () => window.matchMedia("(hover: hover)").matches;
   return (
-    <Reveal delay={0.06 * (index % 4)} className="h-full">
-      <div className="group flex h-full flex-col rounded-2xl border border-white/5 bg-ink-900/60 p-6 transition-colors duration-500 hover:border-gold-500/30">
-        <div className="-mx-2 -mt-2 mb-5 aspect-[16/9] overflow-hidden rounded-xl border border-white/5 bg-ink-950">
-          {item.image ? (
-            <img
-              src={item.image}
-              alt={`${item.title} screenshot`}
-              loading="lazy"
-              className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gold-500/15 via-ink-900 to-ink-950">
-              <span className="font-display text-xl text-zinc-400">{item.title}</span>
+    <Reveal delay={0.08 * (index % 2)} className="h-full">
+      <div
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        aria-label={`${item.title}: show ${flipped ? "screenshot" : "details"}`}
+        onClick={() => !canHover() && toggle()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggle();
+          }
+        }}
+        onMouseEnter={() => canHover() && setFlipped(true)}
+        onMouseLeave={() => canHover() && setFlipped(false)}
+        data-cursor
+        className="group relative aspect-[16/10] w-full cursor-pointer outline-none [perspective:1600px] focus-visible:ring-2 focus-visible:ring-gold-400/60 rounded-2xl"
+      >
+        <div
+          className={`relative h-full w-full ${reduce ? "" : "transition-transform duration-700 [transform-style:preserve-3d]"}`}
+          style={{
+            transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+            transform: !reduce && flipped ? "rotateY(180deg)" : "none",
+          }}
+        >
+          {/* front: the screenshot */}
+          <div className={`${face} bg-ink-950`}>
+            {item.image ? (
+              <img
+                src={item.image}
+                alt={`${item.title} screenshot`}
+                loading="lazy"
+                className="h-full w-full object-cover object-top"
+              />
+            ) : (
+              <div className="h-full w-full bg-gradient-to-br from-gold-500/15 via-ink-900 to-ink-950" />
+            )}
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-ink-950 via-ink-950/85 to-transparent px-6 pb-5 pt-16">
+              <h4 className="font-display text-2xl text-zinc-100 md:text-3xl">{item.title}</h4>
+              <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.25em] text-gold-300">
+                {item.year} · details ↻
+              </span>
             </div>
-          )}
+          </div>
+
+          {/* back: the story */}
+          <div
+            className={`${face} flex flex-col bg-ink-900 p-6 md:p-7 ${reduce ? `transition-opacity duration-500 ${flipped ? "opacity-100" : "pointer-events-none opacity-0"}` : "[transform:rotateY(180deg)]"}`}
+          >
+            <div className="flex items-baseline justify-between gap-3">
+              <h4 className="font-display text-2xl text-gold-300">{item.title}</h4>
+              <span className="font-mono text-[10px] tracking-[0.25em] text-zinc-500">{item.year}</span>
+            </div>
+            <p className="mt-3 flex-1 overflow-y-auto text-sm leading-relaxed text-zinc-300 md:text-[15px]">
+              {item.blurb}
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {item.tags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-400"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+            <div onClick={(e) => e.stopPropagation()}>
+              <LinkPills links={item.links} className="mt-4" />
+            </div>
+          </div>
         </div>
-        <div className="flex items-baseline justify-between gap-3">
-          <h4 className="font-display text-2xl text-zinc-100 transition-colors duration-300 group-hover:text-gold-300">
-            {item.title}
-          </h4>
-          <span className="font-mono text-[10px] tracking-[0.25em] text-zinc-500">
-            {item.year}
-          </span>
-        </div>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">
-          {item.blurb}
-        </p>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {item.tags.map((tag) => (
-            <li
-              key={tag}
-              className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-zinc-500"
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-        <LinkPills links={item.links} className="mt-5" />
       </div>
     </Reveal>
   );
@@ -299,7 +341,7 @@ export default function Work() {
               <span className="text-gold-400">B-roll</span> · From the archive
             </p>
           </Reveal>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-6 md:grid-cols-2 md:gap-8">
             {archive.map((item, i) => (
               <ArchiveCard key={item.title} item={item} index={i} />
             ))}
